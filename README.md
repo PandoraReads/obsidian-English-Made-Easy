@@ -2,6 +2,7 @@
 
 **English Made Easy (EME)** 是一款专为英语爱好者打造的沉浸式 Obsidian 学习插件。它将划词查询、间隔重复（FSRS）闪卡复习和视频跟读完美结合，帮助你通过一站式学习打卡构建丝滑的学习体验和英语语料库，并以最高效的方式掌握它们。
 
+![](https://github.com/PandoraReads/obsidian-English-Made-Easy/blob/main/plugin%20sample%201.png)
 ---
 
 ## ✨ 核心特性
