@@ -1,0 +1,10 @@
+{
+	"id": "obsidian-english-made-easy",
+	"name": "English Made Easy",
+	"version": "3.4.0",
+	"minAppVersion": "1.0.0",
+	"description": "为英语学习者打造的学习助手，集成一键上下文查词，生词本管理、FSRS闪卡复习系统、视频跟读和听写功能",
+	"author": "PandoraReads",
+	"authorUrl": "https://weibo.com/u/6731660390",
+	"isDesktopOnly": false
+}

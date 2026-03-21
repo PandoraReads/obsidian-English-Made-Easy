@@ -1,0 +1,4903 @@
+:root {
+    --eme-font-sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans SC", "Noto Sans CJK SC", system-ui, -apple-system, sans-serif;
+    --eme-font-serif: "Songti SC", "STSong", "Noto Serif CJK SC", "SimSun", "Georgia", serif;
+}
+
+/* ── Global Variables ── */
+.theme-dark {
+    --eme-glass-bg: rgba(30, 30, 30, 0.4);
+    --eme-glass-border: rgba(255, 255, 255, 0.1);
+    --eme-accent: #FF8FB7;
+    --eme-accent-rgb: 255, 143, 183;
+    /* New Pink Accent for Dark Mode */
+    --eme-text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    --eme-heatmap-empty: rgba(255, 255, 255, 0.1);
+    /* Multi-level Heatmap Colors (Emerald/Green) */
+    --eme-heatmap-l1: #006d32;
+    --eme-heatmap-l2: #26a641;
+    --eme-heatmap-l3: #39d353;
+    --eme-heatmap-l4: #00ff88;
+}
+
+.theme-light {
+    --eme-glass-bg: rgba(255, 255, 255, 0.4);
+    --eme-glass-border: rgba(0, 0, 0, 0.05);
+    --eme-accent: #E83C91;
+    --eme-accent-rgb: 232, 60, 145;
+    /* Bold Pink Accent for Light Mode */
+    --eme-text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+    --eme-heatmap-empty: rgba(0, 0, 0, 0.1);
+    /* Multi-level Heatmap Colors (Forest/Green) */
+    --eme-heatmap-l1: #9be9a8;
+    --eme-heatmap-l2: #40c463;
+    --eme-heatmap-l3: #30a14e;
+    --eme-heatmap-l4: #216e39;
+    --eme-active-line-bg: rgba(232, 60, 145, 0.1);
+}
+
+/* Internal class for shadowing highlight */
+.eme-active-line {
+    background-color: var(--eme-active-line-bg) !important;
+    border-radius: 4px;
+    box-shadow: inset 2px 0 0 var(--eme-accent);
+}
+
+/* ── Generic Components ── */
+.eme-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--eme-glass-border);
+    background: var(--eme-glass-bg);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s, background 0.2s;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.eme-btn:hover {
+    transform: translateY(-2px);
+    background: var(--eme-accent);
+    color: white;
+}
+
+/* ── Dictionary View ── */
+.eme-dict-view {
+    padding: 20px;
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* Changed from center to allow scrolling from top */
+    padding-top: 20px;
+    gap: 16px;
+    background-color: var(--background-secondary);
+    background-image: radial-gradient(circle at top right, rgba(var(--eme-accent-rgb), 0.04), transparent 50%),
+        radial-gradient(circle at bottom left, rgba(var(--eme-accent-rgb), 0.02), transparent 40%);
+}
+
+.eme-dict-empty {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 40px;
+    position: relative;
+}
+
+.eme-dict-empty-icon {
+    width: 64px;
+    height: 64px;
+    color: var(--text-accent);
+    opacity: 0.2;
+    margin-bottom: 20px;
+}
+
+.eme-dict-empty-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.eme-dict-empty-title {
+    font-size: 2em;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: var(--text-normal);
+    line-height: 1.1;
+    max-width: 320px;
+    letter-spacing: -0.02em;
+    font-family: system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+}
+
+.eme-dict-empty-desc {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    font-size: 0.7em;
+    font-family: system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+    letter-spacing: 0.03em;
+    text-align: center;
+    background: linear-gradient(to right, #FCF5EE, #FAA4BD);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ── Hero: Orb + Typewriter ── */
+.eme-studio-content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.eme-studio-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.eme-studio-batch-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 12px;
+    background: rgba(var(--eme-accent-rgb), 0.1);
+    border-radius: 12px;
+    border: 1px solid var(--eme-glass-border);
+}
+
+.eme-dict-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 36px;
+    gap: 14px;
+}
+
+.eme-dict-hero-orb {
+    width: 88px;
+    height: 88px;
+    background: radial-gradient(circle at 35% 35%,
+            rgba(var(--eme-accent-rgb), 0.95),
+            rgba(var(--eme-accent-rgb), 0.25));
+    border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+    animation:
+        eme-orb-morph 7s ease-in-out infinite,
+        eme-orb-pulse 3.5s ease-in-out infinite alternate;
+    box-shadow: 0 0 40px rgba(var(--eme-accent-rgb), 0.25);
+}
+
+@keyframes eme-orb-morph {
+
+    0%,
+    100% {
+        border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+    }
+
+    25% {
+        border-radius: 30% 70% 50% 50% / 60% 30% 70% 40%;
+    }
+
+    50% {
+        border-radius: 50% 50% 30% 70% / 40% 70% 30% 60%;
+    }
+
+    75% {
+        border-radius: 70% 30% 60% 40% / 30% 50% 70% 60%;
+    }
+}
+
+@keyframes eme-orb-pulse {
+    from {
+        transform: scale(0.94);
+        opacity: 0.6;
+        box-shadow: 0 0 25px rgba(var(--eme-accent-rgb), 0.15);
+    }
+
+    to {
+        transform: scale(1.06);
+        opacity: 0.88;
+        box-shadow: 0 0 55px rgba(var(--eme-accent-rgb), 0.38);
+    }
+}
+
+.eme-dict-typewriter {
+    font-size: 0.95em;
+    color: #E83C91;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    min-height: 1.5em;
+    text-align: center;
+    font-family: system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+}
+
+.eme-dict-typewriter::after {
+    content: '|';
+    margin-left: 1px;
+    animation: eme-cursor-blink 0.7s step-start infinite;
+}
+
+@keyframes eme-cursor-blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+.eme-dict-empty-actions {
+    margin-top: 10px;
+}
+
+.eme-btn-subtle {
+    background: transparent;
+    border: 1px solid var(--eme-glass-border);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.85em;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+}
+
+.eme-btn-subtle:hover {
+    color: var(--text-accent);
+    border-color: var(--text-accent);
+    background: var(--eme-glass-bg);
+}
+
+/* ── Swaying Mini Garden Sketch ── */
+.eme-garden-sketch-container {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 280px;
+    height: 130px;
+}
+
+.eme-garden-sketch {
+    width: 100%;
+    height: 100%;
+    color: var(--text-normal);
+}
+
+.garden-item {
+    animation: emeGardenSway 3s ease-in-out infinite alternate;
+}
+
+/* Individual swaying variations for a natural feel */
+.plant-1 {
+    animation-duration: 3.2s;
+    animation-delay: -0.5s;
+}
+
+.plant-2 {
+    animation-duration: 2.8s;
+    animation-delay: -1.2s;
+}
+
+.plant-3 {
+    animation-duration: 3.5s;
+    animation-delay: -0.2s;
+}
+
+.plant-4 {
+    animation-duration: 3.0s;
+    animation-delay: -2.0s;
+}
+
+.plant-5 {
+    animation-duration: 3.3s;
+    animation-delay: -0.8s;
+}
+
+.plant-6 {
+    animation-duration: 2.6s;
+    animation-delay: -1.5s;
+}
+
+@keyframes emeGardenSway {
+    0% {
+        transform: rotate(-2.5deg);
+    }
+
+    50% {
+        transform: rotate(1deg);
+    }
+
+    100% {
+        transform: rotate(2.5deg);
+    }
+}
+
+/* ── Dict Empty Background Aurora ── */
+/* Animated pastel gradient — visible on the white/light background
+   because it uses actual faint color hues, not white-on-white. */
+
+.eme-dict-view {
+    position: relative;
+    /* Oversized gradient: background-position animation sweeps it across */
+    background: linear-gradient(135deg,
+            #ffffff 0%,
+            #f3eeff 20%,
+            #eef5ff 40%,
+            #fff5ee 60%,
+            #edfff6 80%,
+            #ffffff 100%);
+    background-size: 300% 300%;
+    animation: emeAuroraShift 10s ease-in-out infinite alternate;
+}
+
+.theme-dark .eme-dict-view {
+    background: linear-gradient(135deg,
+            var(--background-primary) 0%,
+            rgba(var(--eme-accent-rgb), 0.04) 25%,
+            rgba(100, 160, 255, 0.04) 50%,
+            rgba(var(--eme-accent-rgb), 0.03) 75%,
+            var(--background-primary) 100%);
+    background-size: 300% 300%;
+    animation: emeAuroraShift 10s ease-in-out infinite alternate;
+}
+
+.eme-dict-empty {
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes emeAuroraShift {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    33% {
+        background-position: 100% 30%;
+    }
+
+    66% {
+        background-position: 40% 100%;
+    }
+
+    100% {
+        background-position: 0% 60%;
+    }
+}
+
+
+/* ── Dictionary Search Box ── */
+.eme-dict-search-container {
+    padding: 12px;
+    width: 100%;
+}
+
+.eme-dict-search-container.initial {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -20px;
+    width: 80%;
+    /* 4/5 width for initial state */
+}
+
+.eme-dict-search-container.sticky-top {
+    position: sticky;
+    top: -20px;
+    /* Offset parent padding */
+    z-index: 20;
+    background: transparent;
+    padding-bottom: 8px;
+    /* Reduced from 20px */
+}
+
+.eme-dict-search-wrapper {
+    display: flex;
+    align-items: center;
+    background: var(--eme-glass-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--eme-glass-border);
+    border-radius: 20px;
+    padding: 3px 16px;
+    /* Reduced from 6px for shorter height */
+    width: 100%;
+    max-width: 400px;
+    transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+.eme-dict-search-wrapper:focus-within {
+    border-color: var(--eme-glass-border);
+    box-shadow: none;
+}
+
+.eme-dict-search-icon {
+    width: 18px;
+    height: 18px;
+    color: var(--text-muted);
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.6;
+}
+
+.eme-dict-search-input {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    flex: 1;
+    color: var(--text-normal);
+    font-size: 0.9em;
+    padding: 4px 0;
+    outline: none;
+}
+
+/* Pill-shaped Search Box for Initial State */
+.eme-dict-search-container.initial {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -20px;
+    width: 80%;
+}
+
+.eme-dict-search-container.initial .eme-dict-search-wrapper {
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 50px;
+    /* Fully rounded pill */
+    padding: 2px 2px 2px 24px;
+    max-width: 500px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    /* Softer shadow */
+}
+
+.theme-dark .eme-dict-search-container.initial .eme-dict-search-wrapper {
+    background: #1e1e1e;
+    border-color: #333;
+}
+
+.eme-dict-search-btn-internal {
+    background: #111;
+    /* Dark button */
+    color: white;
+    border: none;
+    border-radius: 40px;
+    /* Fully rounded matching pill */
+    padding: 10px 24px;
+    font-size: 0.85em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-left: 10px;
+    box-shadow: none !important;
+    /* Flattened as requested */
+}
+
+.eme-dict-search-btn-internal:hover {
+    background: #000;
+    transform: scale(1.02);
+}
+
+.theme-dark .eme-dict-search-btn-internal {
+    background: #444;
+}
+
+.theme-dark .eme-dict-search-btn-internal:hover {
+    background: #555;
+}
+
+.eme-dict-search-input::placeholder {
+    color: var(--text-muted);
+    opacity: 0.5;
+}
+
+.eme-dict-results-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    /* Reduced from 20px */
+    width: 100%;
+}
+
+.eme-dict-source-badge {
+    align-self: flex-start;
+    padding: 2px 8px;
+    background: rgba(var(--eme-accent-rgb), 0.1);
+    color: var(--eme-accent);
+    border-radius: 4px;
+    font-size: 0.7em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.eme-dict-card {
+    background: var(--eme-glass-bg);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--eme-glass-border);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.eme-dict-header-simple {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.eme-dict-word {
+    font-size: 1.8em;
+    margin: 0;
+    color: var(--text-accent);
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.eme-audio-btn {
+    background: rgba(var(--eme-accent-rgb), 0.1);
+    border: 1px solid rgba(var(--eme-accent-rgb), 0.2);
+    color: var(--eme-accent);
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.eme-audio-btn:hover {
+    background: var(--eme-accent);
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.eme-dict-action-area {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+.eme-add-btn {
+    width: 100%;
+    justify-content: center;
+}
+
+.eme-dict-footer-area {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.eme-open-note-btn-minimal {
+    width: 100%;
+    max-width: 240px;
+    justify-content: center;
+    opacity: 0.9;
+    padding: 10px 20px;
+    margin-top: 15px;
+}
+
+.eme-open-note-btn-footer {
+    width: 80%;
+    max-width: 200px;
+    justify-content: center;
+    opacity: 0.7;
+}
+
+.eme-open-note-btn-footer:hover,
+.eme-open-note-btn-minimal:hover {
+    opacity: 1;
+}
+
+.eme-add-btn.added {
+    color: #32ff7e;
+    border-color: #32ff7e;
+    background: rgba(50, 255, 126, 0.1);
+}
+
+.eme-dict-phonetic {
+    font-family: var(--font-monospace);
+    color: var(--text-muted);
+    margin-right: 8px;
+}
+
+.eme-dict-pos {
+    font-style: italic;
+    color: var(--text-muted);
+}
+
+.eme-dict-definition-container {
+    /* Removed max-height to allow card to grow naturally and scroll in parent view */
+    overflow-y: visible;
+    padding-right: 8px;
+    font-size: 1.1em;
+    margin: 8px 0;
+}
+
+/* Custom Scrollbar for better aesthetic */
+.eme-dict-definition-container::-webkit-scrollbar {
+    width: 4px;
+}
+
+.eme-dict-definition-container::-webkit-scrollbar-thumb {
+    background: var(--eme-glass-border);
+    border-radius: 10px;
+}
+
+.eme-dict-definition-container::-webkit-scrollbar-thumb:hover {
+    background: var(--eme-accent);
+}
+
+.eme-dict-definition {
+    font-size: 1.1em;
+    margin: 8px 0;
+}
+
+.eme-dict-context {
+    margin-top: 20px;
+    padding: 12px;
+    background: rgba(var(--mono-rgb-100), 0.05);
+    border-left: 4px solid var(--eme-accent);
+    border-radius: 4px;
+}
+
+.eme-dict-context-label {
+    font-size: 0.8em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+/* ── Flashcard View & Aurora Background ── */
+.eme-flashcard-view {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 260px;
+    /* Increased to avoid overlap with Banner & Stats */
+    /* Space for banner and stats */
+    background: linear-gradient(135deg,
+            #ffffff 0%,
+            #f3eeff 20%,
+            #eef5ff 40%,
+            #fff5ee 60%,
+            #edfff6 80%,
+            #ffffff 100%);
+    background-size: 300% 300%;
+    animation: emeAuroraShift 10s ease-in-out infinite alternate;
+}
+
+.theme-dark .eme-flashcard-view {
+    background: linear-gradient(135deg,
+            var(--background-primary) 0%,
+            rgba(var(--eme-accent-rgb), 0.04) 25%,
+            rgba(100, 160, 255, 0.04) 50%,
+            rgba(var(--eme-accent-rgb), 0.03) 75%,
+            var(--background-primary) 100%);
+    background-size: 300% 300%;
+    animation: emeAuroraShift 10s ease-in-out infinite alternate;
+}
+
+/* Banner & Quote */
+.eme-quote-banner {
+    position: relative;
+    /* Changed from absolute */
+    padding: 40px 40px 20px;
+    text-align: center;
+    pointer-events: none;
+    z-index: 5;
+    width: 100%;
+}
+
+.eme-quote-text {
+    font-size: 1.3em;
+    font-style: italic;
+    font-family: var(--font-serif, serif);
+    color: var(--text-normal);
+    max-width: 800px;
+    margin: 0 auto 10px;
+    line-height: 1.5;
+    opacity: 0.9;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.eme-quote-author {
+    font-size: 0.95em;
+    color: var(--text-muted);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* Borderless Stats */
+.eme-stats-dashboard-borderless {
+    position: relative;
+    /* Changed from absolute */
+    margin-top: 20px;
+    display: flex;
+    gap: 40px;
+    padding-bottom: 20px;
+    z-index: 10;
+}
+
+.eme-stat-item-simple {
+    text-align: center;
+}
+
+.eme-stat-value-simple {
+    font-size: 1.8em;
+    font-weight: 800;
+    color: var(--eme-accent);
+}
+
+.eme-stat-label-simple {
+    font-size: 0.75em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.eme-aurora-bg {
+    position: fixed;
+    /* Changed from absolute to fixed */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    overflow: hidden;
+    background: var(--background-primary);
+}
+
+.eme-aurora-blob {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.3;
+    animation: aurora-move 20s infinite alternate linear;
+}
+
+.eme-aurora-blob-1 {
+    background: #f5f5f4;
+    /* Warm Parchment */
+    top: -100px;
+    left: -100px;
+}
+
+.eme-aurora-blob-2 {
+    background: #e7e5e4;
+    /* Muted Sand */
+    bottom: -100px;
+    right: -100px;
+    animation-duration: 25s;
+}
+
+.eme-aurora-blob-3 {
+    background: #d6d3d1;
+    /* Soft Clay */
+    bottom: 20%;
+    left: 30%;
+    animation-duration: 15s;
+}
+
+@keyframes aurora-move {
+    from {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    to {
+        transform: translate(100px, 100px) rotate(360deg);
+    }
+}
+
+/* Card Styling */
+.eme-card-area {
+    width: 90%;
+    max-width: 500px;
+    perspective: 1000px;
+    margin-bottom: 40px;
+}
+
+.eme-card-flipper {
+    width: 100%;
+    height: 310px;
+}
+
+/* ── Highlight Notes Sidebar ── */
+.eme-highlight-view {
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: var(--background-secondary);
+    background-image: radial-gradient(circle at top right, rgba(var(--eme-accent-rgb), 0.05), transparent 50%);
+    overflow-y: auto;
+    /* Allow main view to scroll if needed, but usually children do it */
+}
+
+.is-mobile .eme-highlight-view,
+.is-tablet .eme-highlight-view {
+    overflow: visible !important;
+    /* Prevent "masking" by clipping */
+}
+
+.eme-highlight-toolbar {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--eme-glass-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--eme-glass-border);
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.eme-toolbar-top {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+}
+
+.eme-mode-switcher {
+    display: flex;
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    gap: 4px;
+    flex: 1;
+}
+
+/* Consolidated Sidebar Button Style: Unified Glassmorphism for Expand/Collapse */
+.eme-mode-switcher .eme-btn-subtle,
+.eme-mode-switcher .eme-btn-subtle.is-active {
+    flex: 1;
+    border: none !important;
+    border-radius: 8px !important;
+    font-size: 0.82em;
+    font-weight: 500 !important;
+    padding: 8px !important;
+    background: rgba(var(--background-secondary-rgb), 0.4) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    color: var(--text-muted) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+    appearance: none;
+}
+
+.eme-mode-switcher .eme-btn-subtle:hover,
+.eme-mode-switcher .eme-btn-subtle.is-active:hover {
+    background: rgba(var(--background-secondary-rgb), 0.7) !important;
+    color: var(--text-normal) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+.theme-dark .eme-mode-switcher .eme-btn-subtle,
+.theme-dark .eme-mode-switcher .eme-btn-subtle.is-active {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.theme-dark .eme-mode-switcher .eme-btn-subtle:hover,
+.theme-dark .eme-mode-switcher .eme-btn-subtle.is-active:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.eme-mode-switcher .eme-btn-subtle:active {
+    transform: scale(0.96);
+}
+
+/* '管理卡片' button — same glassmorphism as Expand/Collapse */
+.eme-btn-all {
+    border: none !important;
+    border-radius: 8px !important;
+    font-size: 0.82em;
+    font-weight: 500 !important;
+    padding: 8px 12px !important;
+    background: rgba(var(--background-secondary-rgb), 0.4) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    color: var(--text-muted) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+    appearance: none;
+    white-space: nowrap;
+}
+
+.eme-btn-all:hover {
+    background: rgba(var(--background-secondary-rgb), 0.7) !important;
+    color: var(--text-normal) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+.eme-btn-all:active {
+    transform: scale(0.96);
+}
+
+.theme-dark .eme-btn-all {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.theme-dark .eme-btn-all:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.eme-filter-row {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    align-items: center;
+    overflow: hidden;
+}
+
+.eme-search-input {
+    flex: 1;
+    min-width: 0;
+    border-radius: 4px !important;
+    background: var(--background-primary) !important;
+    border: 1px solid var(--eme-glass-border) !important;
+    font-size: 0.9em;
+    padding: 10px 12px !important;
+    transition: all 0.3s;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+.eme-search-input:focus {
+    border-color: var(--eme-accent) !important;
+    box-shadow: 0 0 0 2px rgba(var(--eme-accent-rgb), 0.1) !important;
+}
+
+/* '全部颜色' select — synced with .eme-btn-all style */
+.eme-color-select {
+    flex-shrink: 0;
+    min-width: 95px;
+    border: none !important;
+    border-radius: 8px !important;
+    font-size: 0.82em;
+    font-weight: 500 !important;
+    padding: 8px 12px !important;
+    background: rgba(var(--background-secondary-rgb), 0.4) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    color: var(--text-muted) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+    text-align: center;
+    text-align-last: center;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.eme-color-select:hover {
+    background: rgba(var(--background-secondary-rgb), 0.7) !important;
+    color: var(--text-normal) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+.eme-color-select:active {
+    transform: scale(0.96);
+}
+
+.theme-dark .eme-color-select {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.theme-dark .eme-color-select:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.eme-highlight-container {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0px !important;
+    padding: 2px 8px 10px 0px;
+    min-height: 0;
+    /* Important for flex-basis scrolling */
+}
+
+.is-mobile .eme-highlight-container,
+.is-tablet .eme-highlight-container {
+    overflow-y: auto !important;
+    /* Ensure scrolling is always possible */
+    -webkit-overflow-scrolling: touch;
+}
+
+.eme-highlight-card {
+    background: var(--eme-glass-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--eme-glass-border);
+    border-left: 4px solid transparent;
+    border-radius: 0 12px 12px 0;
+    position: relative;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    overflow: hidden;
+    flex-shrink: 0;
+    cursor: pointer;
+    /* CRITICAL: Prevent vertical squeezing */
+    margin-bottom: 2px;
+    /* Small separation for the index-card look */
+}
+
+/* Subtle 'attachment' shadow on the left edge */
+.eme-highlight-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.06), transparent);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.theme-dark .eme-highlight-card {
+    background: var(--eme-glass-bg);
+    color: var(--text-normal);
+}
+
+.eme-highlight-card:hover {
+    transform: translateX(4px);
+    /* Pull out effect */
+    box-shadow: 4px 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.eme-highlight-card.border-yellow {
+    border-left-color: #ffd700;
+}
+
+.eme-highlight-card.border-pink {
+    border-left-color: #ff8fb7;
+}
+
+.eme-highlight-card.border-blue {
+    border-left-color: #87ceeb;
+}
+
+.eme-highlight-card.border-green {
+    border-left-color: #98fb98;
+}
+
+.eme-h-card-text blockquote {
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-style: italic;
+    color: #333;
+    font-size: 1.05em;
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+.eme-h-card-ai {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    background: transparent;
+}
+
+.eme-ai-btn {
+    border: none !important;
+    background: rgba(var(--background-secondary-rgb), 0.4) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    color: var(--text-muted) !important;
+    border-radius: 8px !important;
+    font-size: 0.81em;
+    font-weight: 500 !important;
+    padding: 6px 10px !important;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+}
+
+.eme-ai-btn:hover {
+    background: rgba(var(--background-secondary-rgb), 0.7) !important;
+    color: var(--text-accent) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+.theme-dark .eme-ai-btn {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.theme-dark .eme-ai-btn:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.eme-ai-btn.is-loading {
+    opacity: 1 !important;
+    color: var(--text-accent) !important;
+    position: relative;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.eme-ai-btn.is-loading::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--text-accent);
+    animation: eme-progress-bar 1.5s ease-in-out infinite;
+    box-shadow: 0 0 5px var(--text-accent);
+}
+
+.eme-ai-btn.is-loading svg,
+.eme-footer-icon-btn.is-loading svg,
+.is-mobile .eme-ai-btn.is-loading svg,
+.is-mobile .eme-footer-icon-btn.is-loading svg {
+    animation: none !important;
+}
+
+.eme-h-card-note {
+    background: #fcfcfc;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px dashed #eee;
+}
+
+.eme-h-textarea {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-size: 0.9em;
+    min-height: 50px;
+    resize: vertical;
+    color: #444;
+    line-height: 1.4;
+    font-family: inherit;
+}
+
+.eme-h-textarea:focus {
+    outline: none;
+}
+
+/* Deprecated/Consolidated into the bottom section */
+.eme-h-card-footer {
+    font-size: 0.8em;
+    color: #999;
+}
+
+.eme-source-link {
+    color: var(--eme-accent);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.eme-source-link:hover {
+    text-decoration: underline;
+}
+
+.eme-card-delete {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    color: #ddd;
+    cursor: pointer;
+    padding: 6px;
+    transition: color 0.2s;
+}
+
+.eme-card-delete:hover {
+    color: #ff5e5e;
+}
+
+/* ── Floating Highlight Menu ── */
+.eme-highlight-menu {
+    position: fixed;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 40px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+    animation: eme-pop-in 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+.theme-dark .eme-highlight-menu {
+    background: rgba(30, 30, 30, 0.95);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.eme-h-menu-lookup {
+    width: 28px;
+    height: 28px;
+    color: var(--eme-accent);
+    padding-right: 12px;
+    border-right: 1px solid var(--eme-glass-border);
+    margin-right: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.eme-h-menu-lookup:hover {
+    opacity: 0.7;
+}
+
+.eme-h-menu-item svg {
+    width: 18px !important;
+    height: 18px !important;
+}
+
+.eme-h-menu-colors {
+    display: flex;
+    gap: 12px;
+}
+
+.eme-h-color-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.eme-h-color-dot:hover {
+    transform: scale(1.35);
+}
+
+.eme-h-color-dot.yellow {
+    background: #ffd700;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.eme-h-color-dot.pink {
+    background: #ff8fb7;
+    box-shadow: 0 0 10px rgba(255, 143, 183, 0.3);
+}
+
+.eme-h-color-dot.blue {
+    background: #87ceeb;
+    box-shadow: 0 0 10px rgba(135, 206, 235, 0.3);
+}
+
+.eme-h-color-dot.green {
+    background: #98fb98;
+    box-shadow: 0 0 10px rgba(152, 251, 152, 0.3);
+}
+
+@keyframes eme-pop-in {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.9) translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) scale(1) translateY(0);
+    }
+}
+
+/* ── Mobile Touch Optimizations ── */
+.is-phone .eme-highlight-menu,
+.is-tablet .eme-highlight-menu,
+.eme-mobile-menu {
+    padding: 12px 20px;
+    gap: 20px;
+}
+
+.is-phone .eme-h-menu-lookup,
+.is-tablet .eme-h-menu-lookup,
+.eme-mobile-menu .eme-h-menu-lookup {
+    width: 32px;
+    height: 32px;
+    padding-right: 16px;
+}
+
+.is-phone .eme-h-menu-item svg,
+.is-tablet .eme-h-menu-item svg,
+.eme-mobile-menu .eme-h-menu-item svg {
+    width: 22px !important;
+    height: 22px !important;
+}
+
+.is-phone .eme-h-color-dot,
+.is-tablet .eme-h-color-dot,
+.eme-mobile-menu .eme-h-color-dot {
+    width: 26px;
+    height: 26px;
+}
+
+/* ── Highlight Tags in Editor/Reading Mode ── */
+mark.eme-highlight {
+    border-radius: 2px;
+    padding: 1px 0;
+    transition: all 0.2s;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+}
+
+/* Fix for highlight overlap - Tight fit on all platforms */
+.is-mobile mark.eme-highlight,
+.is-tablet mark.eme-highlight,
+mark.eme-highlight {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* Ensure it overrides everything */
+.markdown-rendered mark.eme-highlight,
+.cm-s-obsidian .cm-line mark.eme-highlight {
+    background-clip: padding-box;
+}
+
+mark.eme-h-yellow {
+    background-color: #fffac1 !important;
+    background-image: none !important;
+    color: #433e00 !important;
+}
+
+mark.eme-h-pink {
+    background-color: #ffe1ea !important;
+    background-image: none !important;
+    color: #4a001a !important;
+}
+
+mark.eme-h-blue {
+    background-color: #e1f5fe !important;
+    background-image: none !important;
+    color: #003a52 !important;
+}
+
+mark.eme-h-green {
+    background-color: #e8f5e9 !important;
+    background-image: none !important;
+    color: #1b5e20 !important;
+}
+
+.theme-dark mark.eme-h-yellow {
+    background-color: #615a00 !important;
+    background-image: none !important;
+    color: #ffffff !important;
+}
+
+.theme-dark mark.eme-h-pink {
+    background-color: #610029 !important;
+    background-image: none !important;
+    color: #ffffff !important;
+}
+
+.theme-dark mark.eme-h-blue {
+    background-color: #004d61 !important;
+    background-image: none !important;
+    color: #ffffff !important;
+}
+
+.theme-dark mark.eme-h-green {
+    background-color: #1b5e20 !important;
+    background-image: none !important;
+    color: #ffffff !important;
+}
+
+
+.eme-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.eme-card-inner.eme-flipped {
+    transform: rotateY(180deg);
+}
+
+.eme-card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    border-radius: 28px;
+    background: var(--eme-glass-bg);
+    backdrop-filter: blur(24px);
+    border: 1px solid var(--eme-glass-border);
+    text-align: center;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+}
+
+.eme-card-back {
+    transform: rotateY(180deg);
+    justify-content: flex-start;
+    overflow-y: auto;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+}
+
+.eme-card-back::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari and Opera */
+}
+
+.eme-card-word {
+    font-size: 2.6em;
+    font-weight: 800;
+    color: var(--text-normal);
+    margin-bottom: 10px;
+}
+
+.eme-card-word-sm {
+    font-size: 1.6em;
+    margin-bottom: 15px;
+    color: var(--text-accent);
+}
+
+.eme-card-definition {
+    font-size: 1.1em;
+    line-height: 1.4;
+    color: var(--text-normal);
+}
+
+.eme-rating-bar-refined {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 30px auto 0;
+    width: 100%;
+    max-width: 380px;
+    /* Narrower for better focus */
+    transition: opacity 0.4s ease;
+}
+
+.eme-rating-btn-v2 {
+    background: var(--eme-glass-bg);
+    border: 1px solid var(--eme-glass-border);
+    padding: 10px 14px;
+    /* Slightly more compact */
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 0.85em;
+    /* Slightly smaller font */
+    font-weight: 600;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+    color: var(--text-muted);
+    box-shadow: none !important;
+    /* Remove protruding look */
+}
+
+.eme-rating-btn-v2:hover {
+    transform: translateY(-2px);
+    color: white;
+    box-shadow: 0 4px 15px rgba(var(--eme-accent-rgb), 0.2) !important;
+}
+
+.eme-rating-again:hover {
+    background: #ff4757;
+    border-color: #ff4757;
+}
+
+.eme-rating-hard:hover {
+    background: #ffa502;
+    border-color: #ffa502;
+}
+
+.eme-rating-good:hover {
+    background: #2ecc71;
+    border-color: #2ecc71;
+}
+
+.eme-rating-easy:hover {
+    background: #3742fa;
+    border-color: #3742fa;
+}
+
+/* ── Heatmap Styling (Simplified Squares) ── */
+.eme-heatmap-wrapper {
+    position: relative;
+    margin: 60px auto 40px;
+    padding: 0;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    border-radius: 0;
+    width: 90%;
+    max-width: 900px;
+    box-shadow: none;
+}
+
+.eme-heatmap-title-area {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.eme-heatmap-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: var(--text-normal);
+}
+
+.eme-heatmap-rate {
+    padding: 6px 12px !important;
+    background: rgba(var(--background-secondary-rgb), 0.4) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    color: var(--eme-accent) !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-size: 0.81em;
+    font-weight: 500 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+}
+
+.eme-heatmap-rate:hover {
+    background: rgba(var(--background-secondary-rgb), 0.7) !important;
+    color: var(--text-normal) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+.theme-dark .eme-heatmap-rate {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.theme-dark .eme-heatmap-rate:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.eme-heatmap-grid {
+    display: grid;
+    grid-template-columns: repeat(30, 1fr);
+    gap: 5px;
+    width: 100%;
+}
+
+.eme-heatmap-cell {
+    background: var(--eme-heatmap-empty);
+    border-radius: 3px;
+    /* Softer rounding */
+    aspect-ratio: 1 / 1;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    --eme-heatmap-scale: 1;
+}
+
+.eme-heatmap-cell:hover {
+    transform: scale(1.4);
+    z-index: 10;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.eme-heatmap-cell.active {
+    background: var(--eme-accent);
+    box-shadow: 0 0 10px rgba(var(--eme-accent-rgb), 0.4);
+    animation: eme-strobe-breathe 2.5s infinite ease-in-out;
+}
+
+.eme-heatmap-cell.is-today {
+    border: none;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 1);
+    --eme-heatmap-scale: 1.25;
+    animation: eme-strobe-breathe 1.8s infinite ease-in-out;
+    /* Today pulses slightly faster */
+}
+
+.eme-heatmap-cell.future {
+    opacity: 0.2;
+}
+
+@keyframes eme-strobe-breathe {
+
+    0%,
+    100% {
+        opacity: 0.8;
+        transform: scale(var(--eme-heatmap-scale));
+        filter: brightness(1);
+    }
+
+    45% {
+        opacity: 1;
+        transform: scale(calc(var(--eme-heatmap-scale) * 1.15));
+        filter: brightness(1.2);
+    }
+
+    50% {
+        /* The "Strobe" Flash - brief moment of high brightness/white tint */
+        opacity: 1;
+        transform: scale(calc(var(--eme-heatmap-scale) * 1.2));
+        filter: brightness(2) contrast(1.2);
+        background-color: #fff;
+    }
+
+    55% {
+        opacity: 1;
+        transform: scale(calc(var(--eme-heatmap-scale) * 1.15));
+        filter: brightness(1.2);
+    }
+}
+
+/* ── Shadowing Player ── */
+.eme-shadowing-view {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.eme-player-container {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    background: black;
+    aspect-ratio: 16/9;
+}
+
+.eme-video-el,
+.eme-video-iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Animations */
+.eme-spinner {
+    width: 30px;
+    height: 30px;
+    border: 3px solid var(--eme-glass-border);
+    border-top-color: var(--eme-accent);
+    border-radius: 50%;
+    animation: spin 1s infinite linear;
+    margin: 0 auto 10px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Shadowing Immersive Workshop */
+.eme-shadowing-view {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--background-primary);
+    position: relative;
+    overflow: hidden;
+}
+
+.eme-player-outer {
+    flex-shrink: 0;
+    background: transparent;
+    width: 100%;
+    padding: 0 20px 0;
+    /* Aligned with transcript side padding, no top gap */
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    contain: layout;
+    /* Stabilize layout changes */
+    margin-bottom: 20px;
+    /* Restoration: Comfortable gap for Desktop */
+}
+
+.eme-player-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    /* Sharper, professional corners */
+    overflow: hidden;
+    background: #000;
+    box-shadow: none;
+    /* Removed shadow for cleaner interaction */
+    transition: max-height 0.3s ease;
+    /* Smooth height transitions */
+}
+
+.eme-video-el,
+.eme-video-iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.eme-player-controls {
+    display: flex;
+    gap: 8px;
+    padding: 12px;
+    background: var(--eme-glass-bg);
+    border-bottom: 1px solid var(--eme-glass-border);
+    flex-wrap: wrap;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+}
+
+/* Updated List for Workshop */
+.eme-shadowing-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 40px 20px 20px 20px;
+    /* More top padding for the first tab */
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    /* Increased gap to accommodate top tabs */
+    scroll-behavior: smooth;
+    background: transparent;
+    overflow-x: hidden;
+    scrollbar-gutter: stable;
+}
+
+.eme-shadowing-item {
+    padding: 16px 20px;
+    /* Balanced padding */
+    background: #F9F6F2;
+    /* Cream White */
+    border: none;
+    border-radius: 0 8px 8px 8px;
+    /* Slightly rounded corners */
+    cursor: default;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+    font-size: 1.1em;
+    line-height: 1.6;
+    position: relative;
+    opacity: 0.8;
+    scroll-margin-top: 48px;
+    /* Adjusted for top tab */
+    margin-bottom: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+    /* Soft layered paper shadow */
+}
+
+.theme-dark .eme-shadowing-item {
+    background: #121212;
+    /* Deep Black */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 1px 4px rgba(255, 255, 255, 0.05);
+}
+
+.eme-shadowing-item:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+    /* Slight lift on hover */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.eme-shadowing-item.active {
+    background: #F9F6F2;
+    opacity: 1;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 5;
+}
+
+.theme-dark .eme-shadowing-item.active {
+    background: #121212;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 2px 10px rgba(255, 255, 255, 0.08);
+}
+
+/* Timestamp as a Top-Attached Tab */
+.eme-shadowing-item .time {
+    position: absolute;
+    left: 0;
+    top: -24px;
+    /* Grow upwards */
+    height: 24px;
+    min-width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 12px;
+    background: #d6d3d1;
+    /* warm stone */
+    color: #44403c;
+    font-size: 0.72em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-family: var(--font-interface);
+    border-radius: 8px 8px 0 0;
+    /* Grow from top of card */
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+    transform-origin: bottom center;
+}
+
+.theme-dark .eme-shadowing-item .time {
+    background: #44403c;
+    color: #d6d3d1;
+}
+
+/* Remove hover stretch to keep mobile clean, only .active grows */
+/* .eme-shadowing-item:hover .time {
+    top: -32px;
+    height: 32px;
+    color: var(--text-normal);
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+} */
+
+.eme-shadowing-item.active .time {
+    top: -32px;
+    height: 32px;
+    filter: none;
+    background: #d66d4f !important;
+    /* Active Coral */
+    color: white !important;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.15);
+    z-index: 12;
+}
+
+/* Alternating Mode-Switcher Style Colors (Earth Tones) */
+.eme-shadowing-item:nth-child(4n+1) .time {
+    background: #d6d3d1;
+    color: #44403c;
+}
+
+/* Stone */
+.theme-dark .eme-shadowing-item:nth-child(4n+1) .time {
+    background: #44403c;
+    color: #d6d3d1;
+}
+
+.eme-shadowing-item:nth-child(4n+2) .time {
+    background: #e29578;
+    color: white;
+}
+
+/* Coral */
+.eme-shadowing-item:nth-child(4n+3) .time {
+    background: #83a598;
+    color: white;
+}
+
+/* Sage */
+.eme-shadowing-item:nth-child(4n+4) .time {
+    background: #ebb8a5;
+    color: #44403c;
+}
+
+/* Sand */
+
+.eme-shadowing-item .text {
+    color: var(--text-normal);
+    cursor: text;
+    user-select: text !important;
+    -webkit-user-select: text !important;
+    flex: 1;
+    pointer-events: auto !important;
+}
+
+.eme-shadowing-item .text p {
+    margin: 0;
+}
+
+.eme-shadowing-item .text a {
+    color: var(--eme-accent);
+}
+
+.eme-shadowing-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 40px;
+    text-align: center;
+}
+
+.eme-shadowing-icon {
+    font-size: 4em;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.eme-shadowing-help {
+    margin: 20px 0;
+    color: var(--text-muted);
+}
+
+/* ── Vocabulary Note Cards ── */
+.callout[data-callout="eme-vocab"] {
+    --callout-color: var(--eme-accent-rgb);
+    --callout-icon: languages;
+    background: var(--eme-glass-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--eme-glass-border);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    margin: 20px 0;
+}
+
+.callout[data-callout="eme-vocab"] .callout-title {
+    font-size: 1.4em;
+    font-weight: 800;
+    color: var(--eme-accent);
+    border-bottom: 1px solid var(--eme-glass-border);
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+}
+
+.callout[data-callout="eme-vocab"] .callout-content {
+    color: var(--text-normal);
+    line-height: 1.6;
+}
+
+.callout[data-callout="eme-vocab"] strong {
+    color: var(--eme-accent);
+    opacity: 0.9;
+}
+
+/* ── Vocabulary Tags ── */
+.eme-tag-new {
+    background-color: var(--eme-accent);
+    color: white;
+    font-size: 0.6em;
+    padding: 2px 8px;
+    border-radius: 10px;
+    vertical-align: middle;
+    margin-left: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 5px rgba(var(--eme-accent-rgb), 0.3);
+}
+
+.eme-tag {
+    font-size: 0.65em;
+    padding: 2px 10px;
+    border-radius: 12px;
+    vertical-align: middle;
+    margin-left: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block;
+}
+
+.eme-tag-learning {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(79, 172, 254, 0.3);
+}
+
+.eme-tag-review {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(240, 147, 251, 0.3);
+}
+
+.eme-tag-mastered {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(67, 233, 123, 0.3);
+}
+
+/* ── Summary Dashboard ── */
+.callout[data-callout="abstract"] {
+    --callout-color: var(--eme-accent-rgb);
+    border-radius: 16px;
+    border: 1px solid var(--eme-glass-border);
+    background: linear-gradient(135deg, rgba(var(--eme-accent-rgb), 0.05), transparent);
+    backdrop-filter: blur(8px);
+    margin-bottom: 30px;
+}
+
+.callout[data-callout="abstract"] .callout-title {
+    color: var(--text-normal);
+    font-weight: 700;
+}
+
+/* ── MDX Content Normalization ── */
+.eme-mdx-content {
+    font-family: var(--font-text);
+    line-height: 1.5;
+    color: var(--text-normal);
+}
+
+.eme-mdx-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+.eme-mdx-content a {
+    color: var(--text-accent);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--text-accent);
+}
+
+.eme-mdx-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 0.9em;
+}
+
+.eme-mdx-content td,
+.eme-mdx-content th {
+    padding: 6px;
+    border: 1px solid var(--eme-glass-border);
+}
+
+.eme-mdx-content .phonetic {
+    color: var(--text-muted);
+    font-family: var(--font-monospace);
+}
+
+/* Learning Modes Toggles replaced by Bookmark Sidebar */
+.eme-learning-toggles-wrapper {
+    display: none;
+}
+
+.eme-learning-toggles {
+    display: none;
+}
+
+/* ── Dictation Mode ── */
+.eme-dictation-input {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--eme-glass-border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: var(--text-normal);
+    margin-bottom: 8px;
+}
+
+.eme-dictation-feedback {
+    font-family: var(--font-monospace);
+    font-size: 0.9em;
+    line-height: 1.6;
+}
+
+.eme-dictation-feedback span {
+    transition: color 0.2s;
+}
+
+.eme-dictation-feedback .correct {
+    color: #32ff7e;
+    font-weight: bold;
+}
+
+.eme-dictation-feedback .incorrect {
+    color: #ff4d4d;
+    text-decoration: underline;
+}
+
+.eme-dictation-feedback .pending {
+    color: var(--text-muted);
+    opacity: 0.4;
+}
+
+
+/* ── Mode-Specific Sub-Controls ── */
+.eme-learning-toggles-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+    background: var(--background-secondary);
+    border-radius: 12px;
+    border: 1px solid var(--eme-glass-border);
+}
+
+.eme-learning-sub-controls {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    border-top: 1px solid var(--eme-glass-border);
+    padding-top: 10px;
+}
+
+.eme-mini-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    font-size: 0.85em;
+    background: rgba(var(--eme-accent-rgb), 0.1);
+    color: var(--eme-accent);
+    border: 1px solid rgba(var(--eme-accent-rgb), 0.2);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.eme-mini-btn:hover {
+    background: var(--eme-accent);
+    color: #fff;
+}
+
+/* Item Highlighting logic is now handled in the Magazine Style section above */
+
+/* ── Floating Sidebar Layout ── */
+.eme-floating-sidebar {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    z-index: 1000;
+}
+
+.eme-sidebar-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+.eme-sidebar-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px 6px 10px;
+    border-radius: 12px 0 0 12px;
+    /* background: #d6d3d1 !important; Removed general background */
+    border: none;
+    color: #444 !important;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+    white-space: nowrap;
+    transform: translateX(calc(100% - 26px));
+    /* 26px Peek */
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    opacity: 0.8;
+    overflow: hidden;
+    /* Prevent label leak */
+}
+
+/* Persistent Colors for Modes (Active & Inactive) */
+.eme-sidebar-btn.is-shadowing,
+.is-mobile .eme-sidebar-btn.is-shadowing,
+.is-tablet .eme-sidebar-btn.is-shadowing {
+    background: #e29578 !important;
+    /* Persistent Coral */
+    color: white !important;
+    opacity: 0.8;
+}
+
+.eme-sidebar-btn.is-active.is-shadowing,
+.is-mobile .eme-sidebar-btn.is-active.is-shadowing,
+.is-tablet .eme-sidebar-btn.is-active.is-shadowing {
+    opacity: 1;
+}
+
+.eme-sidebar-btn.is-dictation,
+.is-mobile .eme-sidebar-btn.is-dictation,
+.is-tablet .eme-sidebar-btn.is-dictation {
+    background: #d6d3d1 !important;
+    /* Persistent Light Gray */
+    color: #444 !important;
+    opacity: 0.8;
+}
+
+.eme-sidebar-btn.is-active.is-dictation,
+.is-mobile .eme-sidebar-btn.is-active.is-dictation,
+.is-tablet .eme-sidebar-btn.is-active.is-dictation {
+    color: white !important;
+    /* Active dictation text to white for contrast */
+    background: #b1adab !important;
+    /* Slightly darker gray for active state */
+    opacity: 1;
+}
+
+/* Hover Behavior: Expand always */
+.eme-sidebar-btn:hover {
+    transform: translateX(0) !important;
+    opacity: 1;
+    box-shadow: -4px 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+
+.is-mobile .eme-sidebar-btn,
+.is-tablet .eme-sidebar-btn {
+    transform: translateX(calc(100% - 26px)) !important;
+    padding-left: 6px !important;
+}
+
+/* Ensure active stays retracted on mobile/tablet too unless hovered */
+.is-mobile .eme-sidebar-btn.is-active,
+.is-tablet .eme-sidebar-btn.is-active {
+    transform: translateX(calc(100% - 26px)) !important;
+}
+
+.eme-sidebar-btn svg {
+    flex-shrink: 0;
+    width: 16px !important;
+    height: 16px !important;
+}
+
+/* High-Specificity Animation states (Ensures expansion wins on Mobile/Tablet) */
+.eme-sidebar-btn.is-pressed,
+.eme-sidebar-btn.is-animating,
+.is-mobile .eme-sidebar-btn.is-pressed,
+.is-mobile .eme-sidebar-btn.is-animating,
+.is-tablet .eme-sidebar-btn.is-pressed,
+.is-tablet .eme-sidebar-btn.is-animating {
+    transform: translateX(0) scale(1) !important;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    opacity: 1 !important;
+    box-shadow: -6px 6px 20px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Adjust main content to not overlap if needed, but absolute positioning keeps it floating */
+.eme-shadowing-view {
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* ── Mode-Specific Themes & Atmosphere ── */
+
+/* Shadowing/Dictation items now use the unified .eme-shadowing-item magazine style defined above */
+
+.eme-mode-dictation .eme-dictation-input {
+    font-family: var(--font-text) !important;
+    font-size: 0.9em !important;
+    background: var(--background-secondary);
+    border: 1px solid var(--eme-glass-border);
+    padding: 12px;
+    border-radius: 6px;
+}
+
+
+/* Global feedback adjustments */
+.eme-dictation-feedback {
+    margin-top: 8px;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
+
+/* ── Persistent Playback Bar ── */
+.eme-playback-bar {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    margin: 8px 12px;
+}
+
+.eme-playback-btn {
+    border: none !important;
+    background: rgba(var(--background-secondary-rgb), 0.4) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    color: var(--text-muted) !important;
+    border-radius: 8px !important;
+    font-size: 0.78em;
+    font-weight: 500 !important;
+    padding: 6px 10px !important;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+}
+
+.theme-dark .eme-playback-btn {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.eme-playback-btn:hover {
+    background: rgba(var(--background-secondary-rgb), 0.7) !important;
+    color: var(--text-accent) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+.theme-dark .eme-playback-btn:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.eme-playback-btn svg {
+    width: 14px;
+    height: 14px;
+}
+
+.eme-playback-btn .btn-text {
+    font-weight: 500;
+}
+
+/* Adjust sidebar to not show playback buttons anymore */
+.eme-playback-group {
+    display: none !important;
+}
+
+/* ── Refined Exercise Interactivity ── */
+
+/* Dictation Row & Submit */
+.eme-dictation-input-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.eme-mode-dictation .eme-dictation-input {
+    flex: 1;
+    font-family: var(--font-text) !important;
+    font-size: 0.9em !important;
+    padding: 8px 12px;
+}
+
+.eme-dictation-submit-btn {
+    padding: 0 16px;
+    background: var(--eme-accent);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85em;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.eme-dictation-submit-btn:hover {
+    opacity: 0.8;
+}
+
+.eme-dictation-submit-btn.submitted {
+    background: var(--background-modifier-border);
+    color: var(--text-muted);
+}
+
+/* Feedback reveal */
+.eme-dictation-feedback-wrapper {
+    background: rgba(var(--eme-accent-rgb), 0.03);
+    border-left: 3px solid var(--eme-accent);
+    padding: 12px;
+    border-radius: 4px;
+    animation: eme-slide-down 0.3s ease-out;
+}
+
+.eme-dictation-original {
+    margin-bottom: 8px;
+    font-size: 0.9em;
+    color: var(--text-muted);
+}
+
+.eme-dictation-feedback {
+    font-size: 1.05em;
+    font-weight: 500;
+}
+
+.eme-dictation-feedback .label,
+.eme-dictation-original .label {
+    font-weight: bold;
+    margin-right: 4px;
+    color: var(--eme-accent);
+}
+
+
+@keyframes eme-slide-down {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── UI Spacing & Palette Refresh ── */
+
+/* Removed global overrides that squashed Desktop UI - Mobile fixes are moved to .is-mobile scoping */
+
+/* Dictation Improvements */
+.eme-dictation-original p {
+    display: inline;
+    /* Keep markdown content in line for smaller footprint */
+}
+
+.eme-dictation-original .content {
+    background: rgba(var(--eme-accent-rgb), 0.05);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+
+/* ── Final Dictation Focus & Auto-scroll fix ── */
+
+.eme-dictation-input {
+    font-size: 0.9em !important;
+    font-family: var(--font-text);
+    resize: none;
+    overflow: hidden;
+    min-height: 60px;
+    line-height: 1.5;
+}
+
+.eme-dictation-feedback-wrapper {
+    background: transparent !important;
+    border: none !important;
+    border-left: 2px solid var(--eme-accent) !important;
+    padding: 8px 0 8px 12px !important;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* ── Teacher comment card ── */
+.eme-dictation-teacher-card {
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-family: 'Kalam', 'Patrick Hand', 'Caveat', 'Comic Sans MS', 'Chalkboard SE', cursive;
+    font-size: 1em;
+    line-height: 1.8;
+    background: rgba(255, 248, 195, 0.55);
+    border: 1px solid rgba(220, 200, 100, 0.3);
+}
+
+.eme-dictation-teacher-card.tier-excellent {
+    border-left: 4px solid #34c759;
+    color: #1a6e30;
+}
+
+.eme-dictation-teacher-card.tier-good {
+    border-left: 4px solid #ff9f0a;
+    color: #7a4f00;
+}
+
+.eme-dictation-teacher-card.tier-poor {
+    border-left: 4px solid #ff3b30;
+    color: #8b1c16;
+}
+
+.eme-dictation-comment {
+    margin-bottom: 8px;
+}
+
+.eme-dictation-comment strong {
+    font-size: 1.1em;
+}
+
+/* ── Word-level colour highlights (inside teacher card) ── */
+.eme-dictation-word-line {
+    line-height: 2;
+    font-size: 0.9em;
+}
+
+.eme-dictation-word {
+    border-radius: 3px;
+    padding: 1px 3px;
+}
+
+.eme-dictation-word.correct {
+    color: #27a745;
+    background: rgba(52, 199, 89, 0.12);
+}
+
+.eme-dictation-word.wrong {
+    color: #c0392b;
+    background: rgba(255, 59, 48, 0.09);
+    text-decoration: underline wavy rgba(255, 59, 48, 0.5);
+}
+
+/* ── Original text card ── */
+.eme-dictation-original-card {
+    background: var(--background-secondary);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.9em;
+}
+
+.eme-dictation-original-card .label {
+    font-weight: 600;
+    color: var(--eme-accent);
+    margin-right: 4px;
+    font-family: var(--font-text);
+}
+
+.eme-dictation-original-card .content p {
+    display: inline;
+    margin: 0;
+}
+
+
+/* Centering and scroll behavior for all platforms */
+.eme-shadowing-list {
+    scroll-behavior: smooth;
+    padding-top: 20px;
+    padding-bottom: 10vh;
+}
+
+/* Dictionary No Results Page */
+.eme-dict-no-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 300px;
+    padding: 20px;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.eme-no-results-inner {
+    max-width: 250px;
+    animation: emeFadeInUp 0.6s ease-out;
+}
+
+@keyframes emeFadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.eme-no-results-icon {
+    margin-bottom: 24px;
+    opacity: 0.2;
+    transition: opacity 0.3s ease;
+}
+
+.eme-no-results-icon svg {
+    width: 64px;
+    height: 64px;
+    stroke-width: 1px;
+}
+
+.eme-no-results-title {
+    font-size: 1.25em;
+    font-weight: 600;
+    color: var(--text-normal);
+    margin-bottom: 12px;
+}
+
+.eme-no-results-desc {
+    font-size: 0.9em;
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.eme-no-results-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+
+/* 2. Responsive Shadowing Video Player */
+.is-mobile .eme-player-outer {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    padding: 0 !important;
+    background: transparent !important;
+    /* Removed background strip */
+    flex-shrink: 0;
+    width: 100%;
+    margin-bottom: 10px !important;
+    /* Fixed 10px gap as requested */
+}
+
+/* Tablet/Mobile Layout Optimization V7 - Tighter UI, Larger Player */
+.is-mobile .eme-player-container {
+    width: 100% !important;
+    max-width: calc(35vh * 16 / 9) !important;
+    /* Increased from 30vh to 35vh */
+    aspect-ratio: 16 / 9 !important;
+    max-height: 35vh !important;
+    height: auto !important;
+    background: #000 !important;
+    margin: 0 auto !important;
+    overflow: hidden !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.is-mobile .eme-playback-bar {
+    margin: 6px 8px 0px 8px !important;
+    /* Added 6px top margin for breathing room */
+    padding: 0px !important;
+    /* Zero padding for the bar itself */
+    gap: 8px !important;
+    /* Increased horizontal gap for better touch targets */
+}
+
+.is-mobile .eme-playback-btn {
+    padding: 2px 8px !important;
+    height: 32px !important;
+    gap: 4px !important;
+}
+
+.is-mobile .eme-playback-btn svg {
+    width: 14px !important;
+    /* Keep icons visible but scale with height */
+    height: 14px !important;
+}
+
+.is-mobile .eme-playback-btn .btn-text {
+    font-size: 0.8rem !important;
+    /* Slightly larger text for readability */
+}
+
+.is-mobile .eme-shadowing-list {
+    padding-top: 4px !important;
+    gap: 20px !important;
+}
+
+.is-mobile .eme-video-el,
+.is-mobile .eme-video-iframe {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+    /* Prevents stretching/distortion */
+    display: block !important;
+}
+
+/* 3. Dictionary View Footer (Keyboard Aware) */
+.is-mobile .eme-dict-empty-desc {
+    bottom: 10px !important;
+}
+
+@media screen and (max-height: 600px) {
+    .is-mobile .eme-dict-empty-desc {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    .is-mobile .eme-dict-search-container.initial {
+        margin-bottom: 20px !important;
+    }
+}
+
+/* ── Highlight Card Refinements ── */
+.eme-highlight-card {
+    padding: 8px 10px 8px 14px !important;
+    /* More left padding to clear the 4px border + 6px shadow */
+    margin-bottom: 2px !important;
+}
+
+.eme-h-card-text {
+    font-size: 1.02em !important;
+    font-weight: 500 !important;
+    margin: 0px 0 6px 0 !important;
+    line-height: 1.35;
+    color: var(--text-normal);
+}
+
+/* REMOVED: .eme-h-card-actions and .eme-h-card-ai moved to footer */
+
+.eme-h-card-note.is-hidden {
+    display: none;
+}
+
+.eme-h-textarea {
+    min-height: 36px !important;
+    font-size: 0.82em !important;
+    padding: 4px 6px !important;
+    margin-top: 4px !important;
+}
+
+.eme-h-card-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.75em !important;
+    color: var(--text-muted);
+    border-top: 1px dashed var(--eme-glass-border);
+    padding: 4px 10px 2px 10px;
+    /* Aligned at 10px to match AI button internal icons */
+    margin-top: auto;
+    align-items: flex-start;
+}
+
+.eme-footer-row-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    /* Important for space-between to work */
+}
+
+.eme-footer-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.eme-footer-item svg {
+    width: 12px !important;
+    height: 12px !important;
+    opacity: 0.7;
+}
+
+.is-hidden {
+    display: none !important;
+}
+
+.eme-h-card-note-rendered.is-collapsed-note {
+    max-height: 150px;
+    overflow: hidden;
+    position: relative;
+    mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+}
+
+.eme-note-toggle-wrap {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -8px;
+    position: relative;
+    z-index: 5;
+}
+
+.eme-note-expand-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 2px 8px;
+    opacity: 0.6;
+    transition: all 0.2s;
+}
+
+.eme-note-expand-toggle:hover {
+    opacity: 1;
+    color: var(--eme-accent);
+}
+
+.eme-note-expand-toggle svg {
+    width: 16px !important;
+    height: 16px !important;
+}
+
+.eme-card-delete-footer {
+    margin-left: auto;
+    cursor: pointer;
+    color: var(--text-muted);
+    opacity: 0.3;
+    transition: all 0.2s;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+}
+
+.eme-card-delete-footer:hover {
+    color: var(--text-error);
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.eme-card-delete-footer svg {
+    width: 14px !important;
+    height: 14px !important;
+}
+
+/* Tag Styles */
+.eme-h-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 2px;
+    justify-content: flex-start;
+    /* Explicitly left-align tags */
+    width: 100%;
+}
+
+.eme-tag {
+    font-size: 0.75em;
+    background: var(--eme-accent-bg);
+    color: var(--eme-accent);
+    padding: 2px 4px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    margin: 0 !important;
+}
+
+.eme-tag-icon-small {
+    display: flex;
+    align-items: center;
+}
+
+.eme-tag-icon-small svg,
+.eme-tag svg {
+    width: 10px !important;
+    height: 10px !important;
+    opacity: 0.8;
+}
+
+.eme-tag:hover {
+    background: var(--eme-accent);
+    color: white;
+}
+
+/* Tag Manager Tool UI */
+.eme-tag-manager {
+    margin: 8px 0;
+    padding: 10px;
+    background: rgba(var(--mono-rgb-100), 0.03);
+    border: 1px dashed var(--eme-glass-border);
+    border-radius: 8px;
+    width: 100%;
+}
+
+.eme-tag-manager-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.eme-tag-suggestions {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--eme-glass-border);
+}
+
+.eme-tag-suggest-label {
+    display: block;
+    font-size: 0.75em;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+
+.eme-tag-suggest-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    max-height: 120px;
+    overflow-y: auto;
+    padding-bottom: 4px;
+}
+
+/* Custom Scrollbar for Tags */
+.eme-tag-suggest-grid::-webkit-scrollbar {
+    width: 4px;
+}
+
+.eme-tag-suggest-grid::-webkit-scrollbar-thumb {
+    background: var(--eme-glass-border);
+    border-radius: 4px;
+}
+
+.eme-tag-suggestion-chip {
+    padding: 3px 10px;
+    background: rgba(var(--background-secondary-rgb), 0.4) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--eme-glass-border) !important;
+    border-radius: 6px;
+    font-size: 0.78em;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.theme-dark .eme-tag-suggestion-chip {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.eme-tag-suggestion-chip:hover {
+    background: rgba(var(--background-secondary-rgb), 0.6) !important;
+    color: var(--text-normal);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-color: transparent !important;
+    /* Use transparent border on hover to avoid black theme defaults */
+}
+
+.theme-dark .eme-tag-suggestion-chip:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Batch Tag Modal Suggestions */
+.eme-batch-tag-suggestions {
+    display: flex;
+    gap: 8px;
+    margin: 10px 0;
+    justify-content: center;
+}
+
+.eme-tag-chip {
+    padding: 4px 12px;
+    background: rgba(var(--eme-accent-rgb), 0.1);
+    color: var(--eme-accent);
+    border: 1px solid rgba(var(--eme-accent-rgb), 0.2);
+    border-radius: 12px;
+    font-size: 0.85em;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.eme-tag-chip:hover {
+    background: var(--eme-accent);
+    color: white;
+}
+
+.eme-tag-manager-item {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    background: var(--background-modifier-hover);
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    margin: 0 !important;
+}
+
+.eme-tag-del-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-muted);
+    padding: 1px;
+    border-radius: 50%;
+}
+
+.eme-tag-del-btn:hover {
+    background: var(--text-error);
+    color: white;
+}
+
+.eme-tag-del-btn svg {
+    width: 10px !important;
+    height: 10px !important;
+}
+
+.eme-tag.mini {
+    font-size: 0.65em;
+    padding: 1px 4px;
+    opacity: 0.8;
+}
+
+.eme-manager-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 4px;
+}
+
+.eme-tag-input-wrap {
+    margin: 4px 0 8px 0;
+    width: 100%;
+}
+
+.eme-tag-input {
+    width: 100%;
+    font-size: 0.85em !important;
+    padding: 4px 8px !important;
+    height: 32px !important;
+    background: var(--background-modifier-form-field) !important;
+}
+
+/* Footer Actions Icons */
+.eme-footer-actions {
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+    align-items: center;
+    position: relative;
+    /* For more-menu placement */
+}
+
+.eme-footer-icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    cursor: pointer;
+    opacity: 0.4;
+    transition: all 0.2s;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.eme-footer-icon-btn:hover {
+    opacity: 1;
+    background: var(--background-modifier-hover);
+    color: var(--text-normal);
+}
+
+.eme-footer-icon-btn.is-danger:hover {
+    background: rgba(var(--text-error-rgb), 0.1);
+    color: var(--text-error);
+}
+
+.eme-footer-icon-btn svg {
+    width: 14px !important;
+    height: 14px !important;
+}
+
+/* --- New Loading Style: Internal Progress Bar --- */
+.eme-footer-icon-btn.is-loading {
+    opacity: 1 !important;
+    color: var(--text-accent) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.eme-footer-icon-btn.is-loading::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--text-accent);
+    animation: eme-progress-bar 1.5s ease-in-out infinite;
+    box-shadow: 0 0 5px var(--text-accent);
+}
+
+@keyframes eme-progress-bar {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    50% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* --- Mini Tag Styles for Footer Row --- */
+.eme-footer-left-tags {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.eme-tag-mini {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 0.85em;
+    color: var(--text-muted);
+    background: var(--background-secondary);
+    padding: 1px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--eme-glass-border);
+    max-width: 80px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.eme-tag-mini svg {
+    width: 10px !important;
+    height: 10px !important;
+    opacity: 0.6;
+}
+
+/* ── More Menu (Folding) ── */
+.eme-footer-more-menu {
+    position: absolute;
+    right: 0;
+    bottom: 32px;
+    background: var(--background-primary);
+    border: 1px solid var(--eme-glass-border);
+    border-radius: 8px;
+    padding: 4px;
+    display: flex;
+    gap: 4px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px) scale(0.95);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 100;
+}
+
+.eme-footer-more-menu.is-open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+}
+
+.eme-footer-more-menu .eme-footer-icon-btn {
+    opacity: 0.7;
+}
+
+.eme-footer-more-menu .eme-footer-icon-btn:hover {
+    opacity: 1;
+}
+
+@keyframes eme-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ── Toolbar Layout Refinements ── */
+/* ── Vintage Archive Sidebar Header (Index Card Style) ── */
+.eme-highlight-toolbar {
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    margin-bottom: 10px;
+    padding-top: 36px;
+    position: relative;
+    z-index: 5;
+    flex-shrink: 0 !important;
+    /* CRITICAL: Prevent navigation area from squishing */
+}
+
+/* Hide toolbar on mobile/tablet when editing a note to maximize screen space */
+.is-mobile .is-editing-mode .eme-highlight-toolbar,
+.is-tablet .is-editing-mode .eme-highlight-toolbar {
+    display: none !important;
+}
+
+.eme-sidebar-tabs-row {
+    display: flex;
+    gap: 4px;
+    margin-left: 16px;
+    height: 0;
+    position: absolute;
+    top: 36px;
+    z-index: 1;
+}
+
+.eme-sidebar-tab {
+    padding: 6px 16px;
+    border: none;
+    font-size: 0.72em;
+    font-weight: 800;
+    cursor: pointer;
+    transition: height 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1),
+        transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1),
+        filter 0.3s;
+    border-radius: 8px 8px 0 0;
+    height: 30px;
+    transform: translateY(-30px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: white !important;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+    filter: brightness(0.9);
+}
+
+.eme-sidebar-tab.tab-expand {
+    background: #e29578;
+}
+
+/* Warm Sage/Coral */
+.eme-sidebar-tab.tab-collapse {
+    background: #457b9d;
+}
+
+/* Slate Blue */
+.eme-sidebar-tab.tab-studio {
+    background: #eab308;
+}
+
+/* Library Gold */
+
+.eme-sidebar-tab:hover {
+    height: 42px;
+    transform: translateY(-42px);
+    filter: brightness(1.1);
+}
+
+/* Remove active persistence per user request */
+.eme-sidebar-tab.is-active {
+    z-index: 2;
+}
+
+/* Glass Archive Unit (Harmonized with Cards) */
+.eme-search-main-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    background: var(--eme-glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--eme-glass-border);
+    border-radius: 12px;
+    /* Smoother radius to match cards */
+    z-index: 3;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.eme-search-section,
+.eme-filter-section {
+    display: flex;
+    align-items: center;
+    padding: 8px 14px;
+}
+
+.eme-search-section {
+    border-bottom: 1px solid var(--eme-glass-border);
+}
+
+.eme-unit-label {
+    font-size: 11px;
+    font-weight: 900;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    min-width: 55px;
+    opacity: 0.7;
+}
+
+.eme-search-main-row .eme-search-input {
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 4px 8px !important;
+    font-size: 14px;
+    width: 100%;
+    color: var(--text-normal);
+}
+
+/* Color Pills UI */
+.eme-color-pills-wrap {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex: 1;
+}
+
+.eme-color-pill {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.eme-color-pill:hover {
+    transform: scale(1.25);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.eme-color-pill.is-active {
+    border-color: var(--text-accent);
+    transform: scale(1.15);
+    box-shadow: 0 0 0 2px rgba(var(--eme-accent-rgb), 0.2);
+}
+
+.pill-all {
+    background: linear-gradient(45deg, #ff9b9b, #ffda9b, #9bff9b, #9bd3ff, #e29bff);
+}
+
+.pill-yellow {
+    background: #ffd60a;
+}
+
+.pill-pink {
+    background: #ff4d6d;
+}
+
+.pill-blue {
+    background: #00b4d8;
+}
+
+.pill-green {
+    background: #70e000;
+}
+
+/* Collapsed Mode */
+.eme-highlight-card.is-collapsed {
+    padding: 4px 10px !important;
+    margin-bottom: 4px !important;
+    /* Adjusted to match expanded mode */
+}
+
+.eme-highlight-card.is-collapsed .eme-h-card-text {
+    margin-bottom: 0 !important;
+}
+
+.eme-highlight-card.is-collapsed .eme-h-card-note,
+.eme-highlight-card.is-collapsed .eme-h-card-actions,
+.eme-highlight-card.is-collapsed .eme-h-card-footer,
+.eme-highlight-card.is-collapsed .eme-ai-preview {
+    display: none !important;
+}
+
+/* AI Preview Area */
+.eme-ai-preview {
+    background: rgba(var(--eme-accent-rgb), 0.05) !important;
+    border: 1px dashed rgba(var(--eme-accent-rgb), 0.3) !important;
+    border-radius: 6px !important;
+    padding: 6px !important;
+    margin: 4px 0 !important;
+    animation: eme-slide-down 0.2s ease-out;
+}
+
+.eme-preview-header {
+    font-size: 0.7em !important;
+    font-weight: 700 !important;
+    color: var(--eme-accent) !important;
+    margin-bottom: 4px !important;
+    text-transform: uppercase;
+}
+
+/* Compact Markdown Rendering inside cards */
+.eme-h-card-note-rendered,
+.eme-preview-content {
+    font-size: 0.85em !important;
+    line-height: 1.4 !important;
+    color: var(--text-normal);
+}
+
+.eme-h-card-note-rendered p,
+.eme-preview-content p {
+    margin: 4px 0 !important;
+}
+
+.eme-h-card-note-rendered h1,
+.eme-h-card-note-rendered h2,
+.eme-h-card-note-rendered h3,
+.eme-preview-content h1,
+.eme-preview-content h2,
+.eme-preview-content h3 {
+    font-size: 1.1em !important;
+    margin: 8px 0 4px 0 !important;
+}
+
+.eme-h-card-note-rendered ul,
+.eme-preview-content ul {
+    margin: 4px 0 4px 15px !important;
+    padding: 0 !important;
+}
+
+.eme-h-card-note-rendered li,
+.eme-preview-content li {
+    margin: 2px 0 !important;
+}
+
+.eme-preview-content {
+    font-size: 0.85em !important;
+    line-height: 1.5 !important;
+    color: var(--text-normal) !important;
+    margin-bottom: 10px !important;
+    white-space: pre-wrap;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.eme-preview-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.btn-success {
+    background: #2ecc7133 !important;
+    color: #2ecc71 !important;
+    border-color: #2ecc7144 !important;
+}
+
+.btn-success:hover {
+    background: #2ecc71 !important;
+    color: white !important;
+}
+
+.btn-danger {
+    background: #e74c3c33 !important;
+    color: #e74c3c !important;
+    border-color: #e74c3c44 !important;
+}
+
+.btn-danger:hover {
+    background: #e74c3c !important;
+    color: white !important;
+}
+
+/* ── Highlight Studio (Redesign Phase 15) ── */
+.eme-studio {
+    height: 100%;
+    background: transparent;
+    overflow: hidden;
+    position: relative;
+    font-family: var(--eme-font-sans);
+}
+
+.eme-studio-aurora {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.eme-studio-layout {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+/* Sidebar (20%) - Editorial Paper Style */
+.eme-studio-sidebar {
+    width: 20%;
+    min-width: 240px;
+    height: 100%;
+    background: #fafaf9;
+    /* Fine Paper */
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    padding: 32px 24px;
+    overflow-y: auto;
+}
+
+.theme-dark .eme-studio-sidebar {
+    background: #141414;
+    /* Deep Ink */
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.eme-studio-name {
+    font-family: var(--eme-font-serif);
+    font-size: 1.5em;
+    font-weight: 400;
+    color: var(--text-normal);
+    margin: 0 0 24px 0;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--text-normal);
+    padding-bottom: 8px;
+}
+
+.eme-studio-controls-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--text-faint);
+}
+
+.eme-studio-nav-tabs-compact {
+    display: flex;
+    gap: 4px;
+}
+
+.eme-studio-nav-item-compact {
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.eme-studio-nav-item-compact:hover {
+    color: var(--eme-accent);
+}
+
+.eme-studio-nav-item-compact.is-active {
+    color: var(--eme-accent);
+    font-weight: 700;
+}
+
+.eme-studio-mini-btn {
+    border: none !important;
+    background: rgba(var(--background-secondary-rgb), 0.4) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    color: var(--text-muted) !important;
+    border-radius: 8px !important;
+    padding: 6px !important;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+}
+
+.eme-studio-mini-btn:hover {
+    background: rgba(var(--background-secondary-rgb), 0.7) !important;
+    color: var(--text-accent) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+.theme-dark .eme-studio-mini-btn {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.theme-dark .eme-studio-mini-btn:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.eme-studio-mini-btn.is-accent {
+    background: var(--eme-accent-bg) !important;
+    color: var(--eme-accent) !important;
+    border-color: var(--eme-accent) !important;
+}
+
+.eme-studio-mini-btn.is-accent:hover {
+    background: var(--eme-accent) !important;
+    color: white !important;
+}
+
+.eme-studio-search-block {
+    margin: 4px 0 12px 0;
+    /* Reduced from 8px 0 16px 0 */
+}
+
+.eme-studio-search-input-full {
+    width: 100%;
+    height: 32px;
+    background: var(--background-primary-alt) !important;
+    border: 1px solid var(--eme-glass-border) !important;
+    border-radius: 8px !important;
+    padding: 0 12px !important;
+    font-size: 0.85em !important;
+}
+
+.eme-studio-mindmap-canvas {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: radial-gradient(circle at center, rgba(var(--eme-accent-rgb), 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    cursor: grab;
+    min-height: 1000px;
+}
+
+.eme-studio-mindmap-canvas:active {
+    cursor: grabbing;
+}
+
+.eme-studio-card-draggable {
+    z-index: 10;
+    cursor: move;
+    width: 280px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.eme-studio-card-draggable:hover {
+    z-index: 20;
+    border-color: var(--eme-accent);
+}
+
+.eme-studio-search-input-mini {
+    width: 100%;
+    height: 28px;
+    font-size: 0.8em !important;
+    padding: 0 8px !important;
+    background: var(--background-primary-alt) !important;
+    border: 1px solid var(--eme-glass-border) !important;
+    border-radius: 6px !important;
+}
+
+.eme-studio-divider {
+    height: 1px;
+    background: var(--eme-glass-border);
+    margin: 10px 0 20px 0;
+}
+
+.eme-studio-sort-section {
+    margin-bottom: 16px;
+}
+
+.eme-studio-sort {
+    width: 100%;
+    background: var(--background-primary);
+    border: 1px solid var(--eme-glass-border);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 0.85em;
+}
+
+.eme-studio-search-wrap {
+    margin-bottom: 24px;
+    border-bottom: 1.5px solid var(--text-faint);
+    padding-bottom: 8px;
+    transition: border-color 0.3s;
+}
+
+.eme-studio-search-wrap:focus-within {
+    border-color: var(--eme-accent);
+}
+
+.eme-studio-search {
+    width: 100%;
+    height: 32px;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    font-size: 0.95em !important;
+    font-family: var(--font-serif, "Georgia", serif) !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+}
+
+/* Editorial Style items below */
+
+.eme-studio-list-item {
+    padding: 10px 0;
+    margin: 0;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03) !important;
+    border-radius: 0 !important;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: row !important;
+    /* One line */
+    align-items: center;
+    justify-content: space-between;
+}
+
+.theme-dark .eme-studio-list-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03) !important;
+}
+
+.eme-studio-list-item:hover {
+    padding-left: 4px;
+    /* Subtle indent */
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.eme-studio-list-item.is-selected {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.eme-studio-list-item.is-selected .title {
+    color: var(--eme-accent);
+    font-weight: 700;
+}
+
+.eme-studio-list-item-tag {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.eme-studio-list-item .title {
+    font-family: var(--eme-font-serif);
+    font-size: 0.95em;
+    letter-spacing: 0.02em;
+    color: var(--text-normal);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.eme-studio-list-item .meta {
+    font-size: 0.75em;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-family: var(--font-interface);
+}
+
+.eme-studio-list-item .badge {
+    background: transparent !important;
+    color: var(--text-muted);
+    font-size: 0.75em;
+    font-family: var(--font-serif, "Georgia", serif);
+    font-style: italic;
+    font-weight: 400;
+}
+
+.eme-studio-list-item .badge::before {
+    content: "P.";
+    /* Page Number style */
+    margin-right: 2px;
+}
+
+.eme-studio-hint {
+    font-size: 0.8em;
+    color: var(--text-faint);
+    text-align: center;
+    margin-top: 40px;
+}
+
+/* Content (80%) */
+.eme-studio-content {
+    flex: 1;
+    height: 100%;
+    padding: 48px 48px 24px 48px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    background: #fff;
+    /* Paper Content */
+}
+
+.theme-dark .eme-studio-content {
+    background: #0f0f0f;
+}
+
+.eme-studio-content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 48px;
+    padding-bottom: 0;
+    border-bottom: 2px solid var(--text-normal);
+}
+
+.eme-studio-editorial-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 32px;
+    /* Move entire header down further */
+}
+
+.eme-studio-vol-issue {
+    font-size: 0.75em;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    color: var(--eme-accent);
+    margin-top: 8px;
+    /* Push the line down specifically */
+    opacity: 0.8;
+}
+
+.eme-studio-editorial-title {
+    display: none;
+    /* Hidden per request */
+}
+
+.eme-studio-mode-switcher {
+    display: flex;
+    align-items: flex-end;
+}
+
+.eme-studio-tabs-row {
+    display: flex;
+    gap: 2px;
+    align-items: flex-end;
+    padding-top: 12px;
+    /* Space for the shadow to breathe */
+}
+
+.eme-mode-btn {
+    padding: 8px 20px 4px 20px;
+    border: none;
+    background: var(--background-secondary);
+    color: var(--text-muted);
+    font-size: 0.85em;
+    font-weight: 600;
+    font-family: var(--font-interface);
+    cursor: pointer;
+    transition: height 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1), margin-bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1), box-shadow 0.4s, color 0.4s, background 0.4s;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    z-index: 1;
+    height: 34px;
+    margin-bottom: -2px;
+    /* Lock to the 2px border-bottom of the parent */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.eme-mode-btn:hover {
+    height: 42px;
+    /* Grow by 8px */
+    margin-bottom: -2px;
+    /* Stay locked at the bottom */
+    color: var(--text-normal);
+}
+
+.eme-mode-btn:active,
+.eme-mode-btn.is-active:active {
+    height: 38px;
+    margin-bottom: -2px;
+}
+
+.eme-mode-btn.is-active {
+    height: 34px;
+    /* Same as base height to stay level initially */
+    margin-bottom: -2px;
+    color: #fff !important;
+    z-index: 10;
+    /* Subtle shadow when level, pronounced shadow on hover handled via :hover */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.eme-mode-btn.is-active:hover {
+    height: 42px;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.18), 0 -2px 4px rgba(0, 0, 0, 0.12);
+}
+
+.eme-mode-btn.is-active::after {
+    display: none;
+    /* Remove old underline */
+}
+
+/* Specific Bookmark Colors (Earth Tones) */
+.eme-mode-btn.tab-default {
+    background: #d6d3d1;
+    /* warm gray/stone */
+}
+
+.theme-dark .eme-mode-btn.tab-default {
+    background: #44403c;
+}
+
+.eme-mode-btn.tab-review {
+    background: #e29578;
+    /* Coral clay */
+}
+
+.eme-mode-btn.tab-batch {
+    background: #83a598;
+    /* Muted sage */
+}
+
+.eme-mode-btn.tab-default.is-active {
+    background: #78716c;
+}
+
+.eme-mode-btn.tab-review.is-active {
+    background: #d66d4f;
+}
+
+.eme-mode-btn.tab-batch.is-active {
+    background: #5a7b6e;
+}
+
+/* Batch Actions Floating Bar */
+.eme-studio-batch-actions-float {
+    position: absolute;
+    right: 48px;
+    top: 100px;
+    display: flex;
+    gap: 12px;
+    padding: 8px 16px;
+    background: var(--background-secondary);
+    border: 1px solid var(--eme-glass-border);
+    border-radius: 30px;
+    box-shadow: var(--shadow-s);
+    z-index: 100;
+    animation: slideInRight 0.3s ease;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.eme-mode-btn.is-active::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--eme-accent);
+}
+
+/* 🔖 Functional Bookmarks (Phase 48 - Physical Outward Style) */
+.eme-review-spread-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.eme-review-bookmarks {
+    position: absolute;
+    left: calc(100% - 8px);
+    /* 8px overlap = "inserted" portion inside the spread */
+    top: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 100;
+}
+
+.eme-review-bookmark {
+    width: 34px;
+    height: 90px;
+    background: var(--background-secondary);
+    border-radius: 0 8px 8px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 0.75em;
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+    transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1), box-shadow 0.4s;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    letter-spacing: 0.1em;
+    padding: 0 4px;
+    position: relative;
+    transform-origin: left center;
+    /* Keep left edge fixed */
+}
+
+/* Simulated "Stuck" Effect: Linear gradient on the left overlap */
+.eme-review-bookmark::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 8px;
+    /* Overlap shadow width */
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.2), transparent);
+    pointer-events: none;
+}
+
+.eme-review-bookmark.tab-encounter {
+    background: #9980FA;
+    /* Soft Purple/Indigo */
+}
+
+.eme-review-bookmark.tab-priority {
+    background: #e29578;
+    /* Warm Coral */
+}
+
+.eme-review-bookmark.tab-archive {
+    background: #83a598;
+    /* Muted Sage/Blue */
+}
+
+.eme-review-bookmark:hover {
+    width: 50px;
+    /* Expand rightward—left edge stays fixed via transform-origin */
+    box-shadow: 5px 0 16px rgba(0, 0, 0, 0.18);
+}
+
+.eme-review-bookmark:active {
+    width: 45px;
+    opacity: 0.85;
+}
+
+.theme-dark .eme-review-bookmark {
+    box-shadow: 3px 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.theme-dark .eme-review-bookmark::before {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.35), transparent);
+}
+
+.eme-review-spread {
+    display: flex;
+    width: 100%;
+    height: 600px;
+    /* Fixed height */
+    gap: 0;
+    perspective: 2000px;
+    cursor: pointer;
+    background: #F9F6F2;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 20px;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s;
+    transform-style: preserve-3d;
+}
+
+.eme-review-spread.is-flipping {
+    transform: rotateY(-15deg) scale(0.95);
+    opacity: 0.5;
+}
+
+.theme-dark .eme-review-spread {
+    background: #1a1a1a;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+.eme-review-page {
+    flex: 1;
+    height: 100%;
+    padding: 60px;
+    overflow-y: auto;
+    background: inherit;
+    position: relative;
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+    /* Middle spine */
+}
+
+.theme-dark .eme-review-page {
+    border-right-color: rgba(255, 255, 255, 0.05);
+}
+
+.page-right {
+    border-right: none;
+}
+
+/* Left Page: Highlight Styling */
+.eme-review-quote {
+    font-family: var(--font-serif, "Georgia", serif);
+    font-size: 2.4em;
+    line-height: 1.3;
+    color: var(--text-normal);
+    position: relative;
+    padding: 20px 0;
+    margin-top: 40px;
+}
+
+.quote-mark {
+    font-family: serif;
+    font-size: 3em;
+    color: var(--eme-accent);
+    opacity: 0.3;
+    position: absolute;
+}
+
+.quote-mark.open {
+    top: -20px;
+    left: -20px;
+}
+
+.quote-mark.close {
+    bottom: -20px;
+    right: -20px;
+}
+
+.eme-review-meta {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: row;
+    /* Horizontal to fit source/date nicely */
+    align-items: center;
+    gap: 12px;
+    border-top: none;
+    padding-top: 0;
+}
+
+.meta-source {
+    font-family: var(--font-interface);
+    font-size: 0.65em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint) !important;
+    background: transparent !important;
+    padding: 0 !important;
+    display: inline-block;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.theme-dark .meta-source {
+    background: transparent !important;
+    color: var(--text-faint) !important;
+    box-shadow: none !important;
+}
+
+.meta-date {
+    font-family: var(--font-interface);
+    font-size: 0.65em;
+    letter-spacing: 0.1em;
+    color: var(--text-faint);
+    padding-left: 2px;
+}
+
+.eme-review-exit-btn {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--background-primary-alt);
+    border: 1px solid var(--eme-glass-border);
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s;
+    opacity: 0.5;
+}
+
+.eme-review-exit-btn:hover {
+    transform: rotate(90deg);
+    opacity: 1;
+    color: var(--text-error);
+}
+
+.eme-review-exit-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Right Page: Notes Styling */
+.eme-review-notes-header h3 {
+    font-family: var(--font-interface);
+    font-size: 0.8em;
+    letter-spacing: 0.2em;
+    color: var(--eme-accent);
+    margin-bottom: 32px;
+    font-weight: 700;
+}
+
+.eme-review-notes-body {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: var(--text-normal);
+    opacity: 0.85;
+}
+
+.note-placeholder {
+    font-style: italic;
+    color: var(--text-faint);
+    margin-top: 40px;
+}
+
+/* Bottom Navigation Strip */
+.eme-review-nav-strip {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px 0;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.eme-review-thumb {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    background: rgba(var(--mono-rgb-100), 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75em;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.eme-review-thumb:hover {
+    background: rgba(var(--eme-accent-rgb), 0.1);
+    color: var(--eme-accent);
+}
+
+.eme-review-thumb.is-active {
+    background: var(--eme-accent);
+    color: white;
+    font-weight: 700;
+}
+
+.eme-studio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    /* High density */
+    gap: 12px;
+    /* Tight gap */
+}
+
+.eme-studio-card {
+    background: #fff;
+    /* Magazine White */
+    color: #1a1a1a;
+    border: none !important;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 100%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    position: relative;
+    font-family: var(--font-serif, "Georgia", serif);
+    aspect-ratio: 1 / 1;
+    cursor: pointer;
+    text-align: left;
+    /* Magazine text is often left-aligned */
+}
+
+.theme-dark .eme-studio-card {
+    background: #1e1e1e;
+    color: #e0e0e0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.eme-studio-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+    z-index: 5;
+}
+
+.eme-studio-card .card-header {
+    flex: 1;
+    /* Fluid height */
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 24px 24px 12px 24px;
+    background: transparent;
+    border: none;
+    width: 100%;
+    overflow: hidden;
+}
+
+.eme-studio-card .highlight-text {
+    font-size: 1.1em;
+    font-weight: 400;
+    line-height: 1.5;
+    color: inherit;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    line-clamp: 5;
+    /* Added for compatibility */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-align: left;
+    width: 100%;
+}
+
+/* Card footer: absolute right for 5:1 feel, no tags */
+.eme-studio-card .card-footer {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    padding: 0;
+    border-top: none !important;
+    display: flex !important;
+    justify-content: flex-end;
+    align-items: center;
+    background: transparent !important;
+    width: auto;
+    z-index: 10;
+}
+
+.eme-studio-card .card-tags,
+.eme-studio-card .card-note,
+.eme-studio-card .eme-card-note,
+.eme-studio-card .note-preview {
+    display: none !important;
+}
+
+.eme-studio-card .action-btn {
+    width: 24px;
+    height: 24px;
+    padding: 2px;
+    opacity: 0.3;
+    transition: all 0.2s;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+}
+
+.eme-studio-card .action-btn:hover {
+    opacity: 1;
+    color: var(--eme-accent);
+}
+
+.eme-studio-card .action-btn.delete {
+    color: var(--text-faint);
+}
+
+.theme-dark .eme-studio-card .action-btn.delete:hover {
+    color: #ff5252;
+}
+
+/* Highlight Color Sync Classes */
+.eme-studio-card.border-yellow {
+    background: rgba(255, 235, 59, 0.05);
+}
+
+.eme-studio-card.border-yellow:hover {
+    border-color: #fdd835;
+}
+
+.eme-studio-card.border-green {
+    background: rgba(76, 175, 80, 0.05);
+}
+
+.eme-studio-card.border-green:hover {
+    border-color: #4caf50;
+}
+
+.eme-studio-card.border-blue {
+    background: rgba(33, 150, 243, 0.05);
+}
+
+.eme-studio-card.border-blue:hover {
+    border-color: #2196f3;
+}
+
+.eme-studio-card.border-red {
+    background: rgba(244, 67, 54, 0.05);
+}
+
+.eme-studio-card.border-red:hover {
+    border-color: #f44336;
+}
+
+.eme-studio-card.border-purple {
+    background: rgba(156, 39, 176, 0.05);
+}
+
+.eme-studio-card.border-purple:hover {
+    border-color: #9c27b0;
+}
+
+/* Batch Mode Selection Overlay */
+.eme-studio-card.is-selected {
+    border-color: var(--eme-accent) !important;
+    box-shadow: 0 0 0 2px var(--eme-accent) !important;
+}
+
+.eme-studio-card-selection-overlay {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 10;
+}
+
+.eme-studio-card .note-text {
+    font-size: 0.85em;
+    color: var(--text-muted);
+    border-left: 3px solid var(--eme-accent);
+    padding-left: 12px;
+    margin-top: 12px;
+    position: relative;
+    max-height: 80px;
+    /* Force collapse */
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.eme-studio-card .note-text.is-expanded {
+    max-height: 1000px;
+}
+
+.eme-studio-card .note-mask {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: linear-gradient(transparent, var(--eme-glass-bg));
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    cursor: pointer;
+    pointer-events: none;
+}
+
+.eme-studio-card .note-text.is-expanded .note-mask {
+    display: none;
+}
+
+.eme-studio-card .note-expand-icon {
+    pointer-events: auto;
+    color: var(--eme-accent);
+    margin-bottom: 2px;
+    transition: transform 0.3s;
+}
+
+.eme-studio-card .note-text.is-expanded .note-expand-icon {
+    transform: rotate(180deg);
+}
+
+.eme-studio-card .card-footer {
+    display: none;
+    /* Forced hidden for Phase 33 pure visual */
+}
+
+.eme-studio-card .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+}
+
+.eme-studio-card .card-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.eme-studio-card .action-btn {
+    padding: 4px;
+    border-radius: 6px;
+    color: var(--text-faint);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.eme-studio-card .action-btn:hover {
+    background: var(--background-modifier-hover);
+    color: var(--text-normal);
+}
+
+.eme-studio-card .action-btn.delete:hover {
+    background: rgba(var(--text-error-rgb), 0.1);
+    color: var(--text-error);
+}
+
+/* ── Detail Modal Styles ── */
+/* ── Magazine Style Detail Modal ── */
+.eme-detail-modal {
+    max-width: 650px !important;
+    border-radius: 20px !important;
+    background: #F9F6F2 !important;
+    /* Magazine Cream White */
+    color: #1a1a1a !important;
+    padding: 0 !important;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2) !important;
+}
+
+.theme-dark .eme-detail-modal {
+    background: #121212 !important;
+    color: #e0e0e0 !important;
+}
+
+.eme-detail-header {
+    padding: 48px 48px 24px 48px;
+    border-bottom: none;
+    background: transparent;
+    text-align: left;
+}
+
+.eme-detail-meta {
+    font-size: 0.75em;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+    margin-top: 24px;
+    /* More space below large title */
+    margin-bottom: 0;
+    font-weight: 500;
+    font-family: var(--font-interface);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    /* Subtle separator above meta */
+    padding-top: 12px;
+    display: block;
+    /* Changed to block to control width */
+    max-width: 90%;
+    /* Ensure it stays well away from the right edge */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.theme-dark .eme-detail-meta {
+    border-top-color: rgba(255, 255, 255, 0.05);
+}
+
+.eme-detail-highlight {
+    font-family: var(--font-serif, "Georgia", serif);
+    font-size: 1.8em;
+    font-weight: 400;
+    line-height: 1.3;
+    color: inherit;
+    text-align: left;
+    position: relative;
+    padding-left: 24px;
+    border-left: 4px solid var(--eme-accent);
+}
+
+.eme-detail-body {
+    padding: 0 48px 48px 48px;
+    font-size: 1.15em;
+    line-height: 1.8;
+}
+
+.eme-detail-note {
+    color: var(--text-normal);
+    opacity: 0.9;
+    padding: 24px 0;
+    /* Adjusted padding since background is gone */
+    background: transparent;
+    border-radius: 0;
+}
+
+.theme-dark .eme-detail-note {
+    background: transparent;
+}
+
+.eme-detail-footer {
+    padding: 16px 48px 48px 48px;
+    border-top: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Tags left, Actions right */
+    background: transparent;
+}
+
+.eme-detail-actions {
+    display: flex;
+    gap: 24px;
+}
+
+.eme-detail-modal .eme-studio-mini-btn {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    opacity: 0.5;
+    padding: 0 !important;
+    height: auto;
+}
+
+.eme-detail-modal .eme-studio-mini-btn:hover {
+    opacity: 1;
+    color: var(--eme-accent);
+}
+
+.modal-close-button {
+    display: none;
+    /* Hide default for cleaner look if possible, or style it */
+}
+
+/* ── Note Edit Modal ── */
+.eme-note-edit-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 8px 0;
+}
+
+.eme-note-edit-area {
+    background: var(--background-primary-alt);
+    border: 1px solid var(--eme-glass-border);
+    border-radius: 8px;
+    color: var(--text-normal);
+    font-size: 1em;
+    padding: 12px;
+    resize: vertical;
+    min-height: 200px;
+    width: 100%;
+}
+
+.eme-note-edit-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+/* ============================================================
+   📱 Mobile Responsiveness (English Made Easy)
+   ============================================================ */
+
+@media screen and (max-width: 768px) {
+
+    /* 1. Studio Container & Sidebar - Peek Sidebar Design */
+    .eme-studio-container {
+        flex-direction: row !important;
+        /* Back to row to allow side peek */
+        overflow-x: hidden !important;
+        position: relative;
+    }
+
+    .eme-studio-sidebar {
+        position: fixed !important;
+        left: -260px !important;
+        /* Hidden mostly */
+        top: 0;
+        bottom: 0;
+        width: 280px !important;
+        /* Expanded width */
+        z-index: 100 !important;
+        background: var(--background-primary) !important;
+        box-shadow: 4px 0 30px rgba(0, 0, 0, 0.15);
+        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        border-right: 1px solid var(--eme-glass-border) !important;
+        padding: 30px 20px 20px 40px !important;
+        /* Left padding for peek area */
+    }
+
+    /* The 'Peek' indicator visible when collapsed */
+    .eme-studio-sidebar::after {
+        content: "≣";
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 80px;
+        background: rgba(var(--eme-accent-rgb), 0.3);
+        /* Semi-transparent Peek */
+        backdrop-filter: blur(4px);
+        color: var(--eme-accent);
+        /* Bright symbol */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px 0 0 10px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .eme-studio-sidebar:hover,
+    .eme-studio-sidebar:active,
+    .eme-studio-sidebar:focus-within,
+    .eme-studio-sidebar.is-pinned {
+        left: 0px !important;
+    }
+
+    /* 2. Content Area - Full Width */
+    .eme-studio-content {
+        padding: 15px !important;
+        width: 100vw !important;
+        margin-left: 0 !important;
+    }
+
+    .eme-studio-content-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 20px;
+        margin-bottom: 30px !important;
+    }
+
+    /* 3. Tabs & Modes */
+    .eme-studio-tabs-row {
+        width: 100%;
+        justify-content: space-around;
+        gap: 5px;
+    }
+
+    .eme-mode-btn {
+        padding: 6px 12px !important;
+        font-size: 0.75em !important;
+        flex: 1;
+        text-align: center;
+    }
+
+    /* Disable hover expansion on mobile (tap only) */
+    .eme-mode-btn:hover,
+    .eme-mode-btn.is-active:hover {
+        height: 34px !important;
+        /* Force base height on mobile */
+        margin-bottom: -2px !important;
+        /* Overlap the border */
+        transform: none !important;
+        /* Disable translateX pull-out on mobile */
+    }
+
+    .eme-highlight-container {
+        padding-left: 0px !important;
+        /* Keep index card flush logic on mobile */
+    }
+}
+
+/* ── Platform-Specific Styles (Outside Media Query for Tablet/Mobile) ── */
+.is-phone .eme-review-spread {
+    flex-direction: column !important;
+    height: auto !important;
+    min-height: 600px;
+}
+
+.is-phone .eme-review-page {
+    width: 100% !important;
+    padding: 30px !important;
+    border-right: none !important;
+}
+
+/* Tablet keeps horizontal spread if possible, but adjust padding */
+.is-tablet .eme-review-page {
+    padding: 40px !important;
+}
+
+.eme-review-bookmarks {
+    display: flex !important;
+    /* Restore default visibility */
+}
+
+.is-phone .eme-review-bookmarks {
+    display: none !important;
+    /* Keep hidden on phone to avoid clutter */
+}
+
+.is-tablet .eme-review-bookmarks {
+    left: calc(100% - 40px) !important;
+    /* Pull inward slightly on tablet to ensure visibility within safe areas */
+    z-index: 100;
+}
+
+.eme-review-quote {
+    font-size: 1.6em !important;
+    margin-top: 20px !important;
+}
+
+/* 8. AI Loading & Footer Refinements Sync */
+.is-mobile .eme-ai-btn.is-loading,
+.is-mobile .eme-footer-icon-btn.is-loading {
+    position: relative !important;
+    overflow: hidden !important;
+    opacity: 1 !important;
+}
+
+.is-mobile .eme-ai-btn.is-loading::after,
+.is-mobile .eme-footer-icon-btn.is-loading::after {
+    content: "" !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 2px !important;
+    background: var(--text-accent) !important;
+    animation: eme-progress-bar 1.5s ease-in-out infinite !important;
+    box-shadow: 0 0 5px var(--text-accent) !important;
+}
+
+.is-mobile .eme-footer-left-tags {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.is-mobile .eme-h-card-note {
+    border-radius: 4px !important;
+}
+
+.is-mobile .eme-h-textarea,
+.is-tablet .eme-h-textarea {
+    min-height: 80px !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    background: transparent !important;
+    border-radius: 4px !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+}
+
+/* 5. Detail Modal */
+.eme-detail-modal {
+    width: 92vw !important;
+    max-height: 85vh !important;
+    padding: 20px !important;
+}
+
+.eme-detail-header h2 {
+    font-size: 1.4em !important;
+}
+
+.eme-detail-text {
+    font-size: 1.2em !important;
+}
+
+/* 6. Grid Layout */
+.eme-studio-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) !important;
+    gap: 10px !important;
+}
+
+/* 7. Action Buttons */
+.eme-studio-batch-actions-float {
+    right: 20px !important;
+    bottom: 100px !important;
+    top: auto !important;
+    background: var(--background-primary);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Note Edit Modal Responsive Fix ── */
+.is-mobile .eme-note-edit-area,
+.is-tablet .eme-note-edit-area {
+    max-height: calc(100vh - 200px) !important;
+    min-height: 120px !important;
+    overflow-y: auto !important;
+}
+
+.is-mobile .eme-note-edit-container,
+.is-tablet .eme-note-edit-container {
+    max-height: 80vh !important;
+    overflow-y: auto !important;
+}
