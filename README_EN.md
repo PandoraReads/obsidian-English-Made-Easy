@@ -1,6 +1,6 @@
 # English Made Easy (EME) - Obsidian English Learning Assistant
 
-[![Plugin Version](https://img.shields.io/github/v/release/papple/obsidian-english-made-easy?label=Version&color=blue)](https://github.com/papple/obsidian-english-made-easy/releases)
+[![Plugin Version](https://img.shields.io/github/v/release/PandoraReads/obsidian-English-Made-Easy?label=Version&color=blue)](https://github.com/PandoraReads/obsidian-English-Made-Easy/releases)
 [![Obsidian Version](https://img.shields.io/badge/Obsidian-v3.4.0%2B-purple)](https://obsidian.md)
 
 **English Made Easy (EME)** is an immersive Obsidian learning plugin designed specifically for English enthusiasts. It seamlessly combines instant word lookup, spaced repetition (FSRS) flashcard review, and video shadowing to help you build a smooth learning experience and English corpus through one-stop learning sessions, mastering content in the most efficient way possible.
