@@ -90,6 +90,11 @@
 *   **多平台支持**：支持同名微博、小红书、B站、知识星球
 *   **联系与反馈**：欢迎加 VX: **PandoraReads**
 
+### ☕ 请我喝杯咖啡
+本项目**完全免费开源**，后续会持续维护更新；  
+如果它对你的学习或工作有帮助，欢迎支持我去多买点Token。
+![](https://github.com/PandoraReads/obsidian-English-Made-Easy/blob/main/Buy%20Me%20a%20Coffee.jpg)
+
 ---
 
 *“让英语学习像呼吸一样自然。” — English Made Easy*
