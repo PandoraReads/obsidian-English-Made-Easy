@@ -93,7 +93,7 @@
 ### ☕ 请我喝杯咖啡
 本项目**完全免费开源**，后续会持续维护更新；  
 如果它对你的学习或工作有帮助，欢迎支持我去多买点Token。
-![](https://github.com/PandoraReads/obsidian-English-Made-Easy/blob/main/Buy%20Me%20a%20Coffee.jpg)
+![](https://github.com/PandoraReads/obsidian-English-Made-Easy/blob/main/support%20us.jpg)
 
 ---
 
