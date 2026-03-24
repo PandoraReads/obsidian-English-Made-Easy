@@ -89,7 +89,7 @@ If you enjoy this plugin, you can show your support through:
 ### ☕ Buy Me a Coffee
 This project is **completely free and open source**  
 Support my ongoing maintenance and updates via the methods below:
-![buy me a coffee](https://github.com/PandoraReads/obsidian-English-Made-Easy/blob/main/Buy%20Me%20a%20Coffee.jpg)
+![buy me a coffee](https://github.com/PandoraReads/obsidian-English-Made-Easy/blob/main/support%20us.jpg)
 
 ---
 
