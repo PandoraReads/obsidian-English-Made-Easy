@@ -5,6 +5,9 @@
 ![](https://github.com/PandoraReads/obsidian-English-Made-Easy/blob/main/plugin%20sample%201.png)
 ---
 
+[法语内测版](https://github.com/PandoraReads/French-Made-Easy.git)
+[德语内测版](https://github.com/PandoraReads/German-Made-Easy.git)
+
 ## ✨ 核心特性
 
 ### 1. 🔍 沉浸式单词助手 (Dictionary Assistant)
