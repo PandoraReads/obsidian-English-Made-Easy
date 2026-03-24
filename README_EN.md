@@ -5,9 +5,16 @@
 
 **English Made Easy (EME)** is an immersive Obsidian learning plugin designed specifically for English enthusiasts. It seamlessly combines instant word lookup, spaced repetition (FSRS) flashcard review, and video shadowing to help you build a smooth learning experience and English corpus through one-stop learning sessions, mastering content in the most efficient way possible.
 
+### More Language Versions
+- 🇪🇸 [Spanish Beta](https://github.com/PandoraReads/Spanish-Made-Easy.git)
+- 🇫🇷 [French Beta](https://github.com/PandoraReads/French-Made-Easy.git)
+- 🇩🇪 [German Beta](https://github.com/PandoraReads/German-Made-Easy.git)
+
+![](https://github.com/PandoraReads/obsidian-English-Made-Easy/blob/main/plugin%20sample%201.png)
 ---
 
-## <img src="/Users/papple/Library/Application Support/typora-user-images/截屏2026-03-21 17.17.01.png" alt="Screenshot 2026-03-21 17.17.01" style="zoom:40%;" />
+---
+
 
 ## ✨ Core Features
 
@@ -78,6 +85,11 @@ If you enjoy this plugin, you can show your support through:
 *   **Follow Official Account**: 潘多拉的数字花园 (Pandora's Digital Garden)
 *   **Multi-Platform Support**: Also available on Weibo, Xiaohongshu (Little Red Book), and Knowledge Planet under the same name
 *   **Contact & Feedback**: Feel free to add VX: **PandoraReads**
+
+### ☕ Buy Me a Coffee
+This project is **completely free and open source**  
+Support my ongoing maintenance and updates via the methods below:
+![buy me a coffee](https://github.com/PandoraReads/obsidian-English-Made-Easy/blob/main/Buy%20Me%20a%20Coffee.jpg)
 
 ---
 
