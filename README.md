@@ -4,7 +4,6 @@
 
 [![Plugin Version](https://img.shields.io/github/v/release/PandoraReads/obsidian-English-Made-Easy?label=Version&color=blue)](https://github.com/PandoraReads/obsidian-English-Made-Easy/releases)
 [![Obsidian Version](https://img.shields.io/badge/Obsidian-v3.4.0%2B-purple)](https://obsidian.md)
-
 ---
 
 ### 其他语言版本
