@@ -11,6 +11,8 @@
 - 🇫🇷 [法语内测版](https://github.com/PandoraReads/French-Made-Easy.git)
 - 🇩🇪 [德语内测版](https://github.com/PandoraReads/German-Made-Easy.git)
 
+### **小语种邀请码申请，请至公众号【潘多拉的数字花园】后台回复：“邀请码”**
+
 ![](https://github.com/PandoraReads/obsidian-English-Made-Easy/blob/main/plugin%20sample%201.png)
 ---
 
