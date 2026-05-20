@@ -6,12 +6,7 @@
 [![Obsidian Version](https://img.shields.io/badge/Obsidian-v3.4.0%2B-purple)](https://obsidian.md)
 ---
 
-### 其他语言版本
-- 🇪🇸 [西班牙语内测版](https://github.com/PandoraReads/Spanish-Made-Easy.git)
-- 🇫🇷 [法语内测版](https://github.com/PandoraReads/French-Made-Easy.git)
-- 🇩🇪 [德语内测版](https://github.com/PandoraReads/German-Made-Easy.git)
-
-### **小语种邀请码申请，请至公众号【潘多拉的数字花园】后台回复：“邀请码”**
+进阶版Language Made Easy介绍👉https://ecn9ttbxaoyk.feishu.cn/wiki/NhUHwOdYRiicFQkAZDZcjJEZn3b?from=from_copylink
 
 ![](https://github.com/PandoraReads/obsidian-English-Made-Easy/blob/main/plugin%20sample%201.png)
 ---
