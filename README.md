@@ -6,7 +6,7 @@
 [![Obsidian Version](https://img.shields.io/badge/Obsidian-v3.4.0%2B-purple)](https://obsidian.md)
 ---
 
-进阶版Language Made Easy介绍👉https://ecn9ttbxaoyk.feishu.cn/wiki/NhUHwOdYRiicFQkAZDZcjJEZn3b?from=from_copylink
+**进阶版Language Made Easy介绍**👉https://ecn9ttbxaoyk.feishu.cn/wiki/NhUHwOdYRiicFQkAZDZcjJEZn3b?from=from_copylink
 
 ![](https://github.com/PandoraReads/obsidian-English-Made-Easy/blob/main/plugin%20sample%201.png)
 ---
